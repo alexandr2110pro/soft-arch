@@ -73,12 +73,33 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
+    },
+    "nx-release-publish": {
+      "dependsOn": ["build"],
+      "executor": "@nx/js:release-publish",
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
     }
   },
   "release": {
-    "projects": ["*"],
+    "projectsRelationship": "fixed",
+    "projects": ["packages/**"],
+    "releaseTagPattern": "v{version}",
+    "git": {
+      "commitMessage": "chore: release version {version} [no ci]"
+    },
     "version": {
-      "preVersionCommand": "pnpm dlx nx run-many -t build"
+      "conventionalCommits": true,
+      "preVersionCommand": "pnpm dlx nx run-many -t build --projects=tag:npm:public"
+    },
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github",
+        "file": "CHANGELOG.md",
+        "entryWhenNoChanges": false
+      },
+      "projectChangelogs": false
     }
   }
 }

@@ -1,6 +1,7 @@
 {
   "name": "@space-architects/nx-plugin-std",
   "version": "0.0.1",
+  "description": "Standard Nx plugin for Space Architects workspace",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -18,6 +19,26 @@
     "!**/*.tsbuildinfo",
     "generators.json"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexandr-bsu/space-architects.git",
+    "directory": "packages/nx/plugin/std"
+  },
+  "homepage": "https://github.com/alexandr-bsu/space-architects#readme",
+  "bugs": {
+    "url": "https://github.com/alexandr-bsu/space-architects/issues"
+  },
+  "keywords": [
+    "nx",
+    "plugin",
+    "workspace",
+    "space-architects"
+  ],
+  "author": "Space Architects",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "nx": {
     "name": "nx-plugin-std",
     "targets": {

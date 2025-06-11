@@ -1,0 +1,73 @@
+name: Prepare Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Run in dry-run mode (no actual changes)'
+        required: false
+        default: true
+        type: boolean
+
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Fetch full git history for conventional commits analysis
+          fetch-depth: 0
+          # Use PAT to trigger subsequent workflows
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9.8.0
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - name: Configure Git
+        run: |
+          git config user.name "Release Bot"
+          git config user.email "release-bot@space-architects.com"
+
+      - name: Run Nx Release (Dry Run)
+        if: ${{ inputs.dry-run == true }}
+        run: |
+          echo "🧪 Running in dry-run mode..."
+          pnpm dlx nx release --dry-run --verbose
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Nx Release (Production)
+        if: ${{ inputs.dry-run == false }}
+        run: |
+          echo "🚀 Running production release..."
+          pnpm dlx nx release --skip-publish --verbose
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release Summary
+        run: |
+          echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Mode**: ${{ inputs.dry-run == true && 'Dry Run' || 'Production' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Workflow**: Release preparation completed" >> $GITHUB_STEP_SUMMARY
+          echo "- **Next Step**: ${{ inputs.dry-run == false && 'Packages will be published automatically when GitHub release is created' || 'Review changes and run again with dry-run=false' }}" >> $GITHUB_STEP_SUMMARY 
