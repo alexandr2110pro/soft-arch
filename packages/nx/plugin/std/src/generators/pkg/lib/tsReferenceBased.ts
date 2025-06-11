@@ -7,6 +7,7 @@ import type { PkgGeneratorSchema } from '../schema';
 
 import { addEnvTypesToTsconfig } from './util/addEnvTypesToTsconfig';
 import { addScopedLocalPackage } from './util/addLocalPackage';
+import { addPublishInfoToPackageJson } from './util/addPublishInfoToPackageJson';
 import { updateViteBuildFormats } from './util/updateViteBuildFormats';
 import { updateVitestConfig } from './util/updateVitestConfig';
 
@@ -39,19 +40,15 @@ export async function tsReferenceBased(
     updateViteBuildFormats(tree, path);
 
     // Update package.json exports to include require field for cjs
-    const packageJsonPath = joinPathFragments(path, 'package.json');
+    updateJson(tree, joinPathFragments(path, 'package.json'), json => {
+      json.exports['.'] = {
+        ...(json.exports['.'] ?? {}),
+        require: './dist/index.cjs',
+      };
+      return json;
+    });
 
-    if (tree.exists(packageJsonPath)) {
-      updateJson(tree, packageJsonPath, json => {
-        if (json.exports && json.exports['.']) {
-          json.exports['.'] = {
-            require: './dist/index.cjs',
-            ...json.exports['.'],
-          };
-        }
-        return json;
-      });
-    }
+    addPublishInfoToPackageJson(tree, path);
   }
 
   // do that in both cases

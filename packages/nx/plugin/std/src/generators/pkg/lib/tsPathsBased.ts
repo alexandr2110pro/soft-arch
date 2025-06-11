@@ -7,6 +7,7 @@ import type { PackageJson } from 'nx/src/utils/package-json';
 import type { PkgGeneratorSchema } from '../schema';
 
 import { addEnvTypesToTsconfig } from './util/addEnvTypesToTsconfig.js';
+import { addPublishInfoToPackageJson } from './util/addPublishInfoToPackageJson';
 import { updateViteBuildFormats } from './util/updateViteBuildFormats.js';
 import { updateVitestConfig } from './util/updateVitestConfig.js';
 
@@ -50,6 +51,7 @@ export async function tsPathsbased(
   if (publishable) {
     updateViteBuildFormats(tree, path);
     updateVitestConfig(tree, path, env);
+    addPublishInfoToPackageJson(tree, path);
   } else {
     tree.delete(joinPathFragments(path, 'package.json'));
   }

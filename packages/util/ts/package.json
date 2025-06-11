@@ -21,16 +21,17 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexandr-bsu/space-architects.git",
+    "url": "https://github.com/space-architects/space-architects.git",
     "directory": "packages/util/ts"
   },
-  "homepage": "https://github.com/alexandr-bsu/space-architects#readme",
+  "homepage": "https://github.com/space-architects/space-architects#readme",
   "bugs": {
-    "url": "https://github.com/alexandr-bsu/space-architects/issues"
+    "url": "https://github.com/space-architects/space-architects/issues"
   },
   "keywords": [
     "typescript",
     "utilities",
+    "types",
     "space-architects"
   ],
   "author": "Space Architects",
@@ -39,7 +40,10 @@
     "access": "public"
   },
   "nx": {
-    "name": "util-ts"
+    "name": "util-ts",
+    "tags": [
+      "npm:public"
+    ]
   },
   "dependencies": {}
 }

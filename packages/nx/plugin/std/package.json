@@ -21,12 +21,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexandr-bsu/space-architects.git",
+    "url": "https://github.com/space-architects/space-architects.git",
     "directory": "packages/nx/plugin/std"
   },
-  "homepage": "https://github.com/alexandr-bsu/space-architects#readme",
+  "homepage": "https://github.com/space-architects/space-architects#readme",
   "bugs": {
-    "url": "https://github.com/alexandr-bsu/space-architects/issues"
+    "url": "https://github.com/space-architects/space-architects/issues"
   },
   "keywords": [
     "nx",
@@ -41,6 +41,9 @@
   },
   "nx": {
     "name": "nx-plugin-std",
+    "tags": [
+      "npm:public"
+    ],
     "targets": {
       "build": {
         "executor": "@nx/js:tsc",

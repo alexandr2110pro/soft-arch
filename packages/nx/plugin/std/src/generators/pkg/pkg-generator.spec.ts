@@ -54,6 +54,12 @@ describe('ts-reference-based package generator', () => {
   it('should create expected package.json', async () => {
     await pkgGenerator(tree, options);
     expect(readJson(tree, 'packages/foo/bar-baz/package.json')).toEqual({
+      ...makeStandardPackageJsonSettings(),
+      repository: {
+        ...makeStandardPackageJsonSettings().repository,
+        directory: 'packages/foo/bar-baz',
+      },
+      publishConfig: { access: 'public' },
       dependencies: {},
       exports: {
         '.': {
@@ -150,6 +156,12 @@ describe('ts-path-based publishable package', () => {
   it('should create expected package.json', async () => {
     await pkgGenerator(tree, options);
     expect(readJson(tree, 'packages/foo/bar-baz/package.json')).toEqual({
+      ...makeStandardPackageJsonSettings(),
+      repository: {
+        ...makeStandardPackageJsonSettings().repository,
+        directory: 'packages/foo/bar-baz',
+      },
+      publishConfig: { access: 'public' },
       dependencies: {},
       main: './index.js',
       name: '@ns/foo-bar-baz',
@@ -210,14 +222,15 @@ describe('ts-path-based publishable package', () => {
   });
 });
 
+
+
 //---------------------------------------
 
 function createEmptyPathBasedWorkspace() {
   const tree = createTreeWithEmptyWorkspace();
 
   updateJson(tree, 'package.json', json => {
-    json.name = '@ns/source';
-    return json;
+    return Object.assign(json, makeStandardPackageJsonSettings());
   });
 
   writeJson(tree, 'tsconfig.base.json', {
@@ -238,8 +251,8 @@ function createEmptyReferenceBasedWorkspace() {
   const tree = createTreeWithEmptyWorkspace();
 
   updateJson(tree, 'package.json', json => {
+    Object.assign(json, makeStandardPackageJsonSettings());
     json.workspaces = ['packages/*'];
-    json.name = '@ns/source';
     return json;
   });
 
@@ -260,4 +273,21 @@ function createEmptyReferenceBasedWorkspace() {
   tree.write('pnpm-workspace.yaml', '');
 
   return tree;
+}
+
+function makeStandardPackageJsonSettings() {
+  return {
+    name: '@ns/source',
+    repository: {
+      type: 'git',
+      url: 'https://github.com/space-architects/space-architects.git',
+      directory: '.',
+    },
+    homepage: 'https://github.com/space-architects/space-architects',
+    bugs: {
+      url: 'https://github.com/space-architects/space-architects/issues',
+    },
+    author: 'Space Architects',
+    license: 'MIT',
+  };
 }
