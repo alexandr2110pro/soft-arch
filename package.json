@@ -4,12 +4,22 @@
   "license": "MIT",
   "scripts": {},
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/space-architects/space-architects.git",
+    "directory": "."
+  },
+  "homepage": "https://github.com/space-architects/space-architects#readme",
+  "bugs": {
+    "url": "https://github.com/space-architects/space-architects/issues"
+  },
+  "author": "Space Architects",
   "dependencies": {
-    "@space-architects/util-enum": "workspace:*",
     "@space-architects/util-ts": "workspace:*",
     "next": "~15.2.4",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "zod": "^3.25.61"
   },
   "devDependencies": {
     "@edge-runtime/types": "^4.0.0",
