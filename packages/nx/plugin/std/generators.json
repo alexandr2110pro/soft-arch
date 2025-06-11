@@ -1,0 +1,14 @@
+{
+  "generators": {
+    "pkg": {
+      "factory": "./dist/generators/pkg/pkg-generator",
+      "schema": "./dist/generators/pkg/schema.json",
+      "description": "pkg generator"
+    },
+    "init": {
+      "factory": "./dist/generators/init/init-generator",
+      "schema": "./dist/generators/init/schema.json",
+      "description": "init generator"
+    }
+  }
+}

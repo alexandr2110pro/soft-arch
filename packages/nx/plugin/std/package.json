@@ -1,0 +1,61 @@
+{
+  "name": "@space-architects/nx-plugin-std",
+  "version": "0.0.1",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo",
+    "generators.json"
+  ],
+  "nx": {
+    "name": "nx-plugin-std",
+    "targets": {
+      "build": {
+        "executor": "@nx/js:tsc",
+        "outputs": [
+          "{options.outputPath}"
+        ],
+        "options": {
+          "outputPath": "packages/nx/plugin/std/dist",
+          "main": "packages/nx/plugin/std/src/index.ts",
+          "tsConfig": "packages/nx/plugin/std/tsconfig.lib.json",
+          "rootDir": "packages/nx/plugin/std/src",
+          "generatePackageJson": false,
+          "assets": [
+            {
+              "input": "./packages/nx/plugin/std/src",
+              "glob": "**/!(*.ts)",
+              "output": "."
+            },
+            {
+              "input": "./packages/nx/plugin/std/src",
+              "glob": "**/*.d.ts",
+              "output": "."
+            }
+          ]
+        }
+      }
+    }
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "tslib": ">=2.3.0",
+    "vitest": ">=3.2.3",
+    "nx": ">=21.1.3 <22.0.0",
+    "@nx/devkit": ">=21.1.3 <22.0.0",
+    "@nx/eslint": ">=21.1.3 <22.0.0",
+    "@nx/js": ">=21.1.3 <22.0.0"
+  },
+  "generators": "./generators.json"
+}

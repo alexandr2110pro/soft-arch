@@ -42,3 +42,18 @@ Thumbs.db
 .nx/workspace-data
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
+
+vite.config.*.timestamp*
+vitest.config.*.timestamp*
+
+
+.env
+.env.*
+!.env.example
+
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
+
+# Next.js
+.next
+out

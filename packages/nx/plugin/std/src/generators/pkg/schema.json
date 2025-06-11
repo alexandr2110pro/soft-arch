@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Pkg",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "description": "The kind of package to create",
+      "type": "string",
+      "enum": ["ts-paths-based", "ts-reference-based", "node"],
+      "default": "ts-reference-based",
+      "x-prompt": {
+        "type": "list",
+        "message": "The kind of package you want to create?",
+        "items": [
+          {
+            "label": "ts-paths-based",
+            "value": "ts-paths-based"
+          },
+          {
+            "label": "ts-reference-based",
+            "value": "ts-reference-based"
+          }
+        ]
+      }
+    },
+    "path": {
+      "type": "string",
+      "description": "path to create the library, including the name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Enter the full path to create the library, including the name"
+    },
+    "publishable": {
+      "type": "boolean",
+      "description": "Whether the package is publishable",
+      "default": false
+    },
+    "env": {
+      "type": "string",
+      "description": "The environment this package will run in",
+      "default": "edge",
+      "enum": ["node", "jsdom", "edge"],
+      "x-prompt": {
+        "type": "list",
+        "message": "Select the environment this package will run in",
+        "items": [
+          {
+            "label": "node",
+            "value": "node"
+          },
+          {
+            "label": "jsdom",
+            "value": "jsdom"
+          },
+          {
+            "label": "edge",
+            "value": "edge"
+          }
+        ]
+      }
+    }
+  },
+  "required": ["kind", "path", "publishable", "env"]
+}

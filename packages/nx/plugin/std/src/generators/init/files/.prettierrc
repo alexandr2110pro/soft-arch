@@ -1,0 +1,32 @@
+{
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "bracketSpacing": true,
+  "arrowParens": "avoid",
+  "printWidth": 80,
+  "proseWrap": "always",
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-classnames",
+    "prettier-plugin-merge"
+  ],
+  "importOrder": [
+    "^server-only$",
+    "<THIRD_PARTY_MODULES>",
+    "^@com\\/web-ui\\/(shadcn|lib|hooks)\\/",
+    "^@com\\/web-ui\\/components\\/",
+    "^@com\\/",
+    "^.+\\/shadcn\\/",
+    "^\\.\\./",
+    "^\\./"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "tailwindStylesheet": "./com/web/app/src/app/global.css",
+  "tailwindConfig": "./com/web/app/tailwind.config.js",
+  "tailwindFunctions": ["clsx", "cn", "cva"],
+  "customFunctions": ["clsx", "cn", "cva"]
+}

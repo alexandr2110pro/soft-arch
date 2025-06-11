@@ -2,5 +2,15 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./packages/util/ts"
+    },
+    {
+      "path": "./packages/nx/plugin/std"
+    },
+    {
+      "path": "./packages/util/enum"
+    }
+  ]
 }
