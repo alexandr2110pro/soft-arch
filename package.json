@@ -17,11 +17,14 @@
   },
   "author": "Space Architects",
   "dependencies": {
+    "@space-architects/util-drizzle": "workspace:*",
     "@space-architects/util-enum": "workspace:*",
     "@space-architects/util-ts": "workspace:*",
+    "drizzle-orm": "^0.44.2",
     "next": "~15.3.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "uuid": "^11.1.0",
     "zod": "^3.25.64"
   },
   "devDependencies": {

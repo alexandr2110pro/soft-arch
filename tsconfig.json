@@ -11,6 +11,9 @@
     },
     {
       "path": "./packages/util/enum"
+    },
+    {
+      "path": "./packages/util/drizzle"
     }
   ]
 }

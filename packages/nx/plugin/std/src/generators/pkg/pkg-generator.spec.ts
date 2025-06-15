@@ -71,37 +71,12 @@ describe('ts-reference-based publishable package', () => {
       '@ns/foo-bar-baz': 'workspace:*',
     });
   });
-
-  it('should create expected package.json', async () => {
+  it('should generate expected package.json', async () => {
     await pkgGenerator(tree, options);
-    expect(readJson(tree, 'packages/foo/bar-baz/package.json')).toEqual({
-      ...rootPackageJsonBase(),
-      repository: {
-        ...rootPackageJsonBase().repository,
-        directory: 'packages/foo/bar-baz',
-      },
-      publishConfig: { access: 'public' },
-      dependencies: {},
-      nx: expect.objectContaining({
-        name: 'foo-bar-baz',
-      }),
-      exports: {
-        '.': {
-          require: './dist/index.cjs',
-          default: './dist/index.js',
-          import: './dist/index.js',
-          types: './dist/index.d.ts',
-        },
-        './package.json': './package.json',
-      },
-      files: ['dist', '!**/*.tsbuildinfo'],
-      main: './dist/index.js',
-      module: './dist/index.js',
-      name: '@ns/foo-bar-baz',
-      type: 'module',
-      types: './dist/index.d.ts',
-      version: '0.0.1',
-    });
+    const packageJson = tree
+      .read('packages/foo/bar-baz/package.json')
+      ?.toString();
+    expect(packageJson).toMatchSnapshot();
   });
 
   it('should not create project.json', async () => {
@@ -210,6 +185,7 @@ describe('ts-reference-based not publishable package', () => {
           types: './dist/index.d.ts',
           import: './dist/index.js',
           default: './dist/index.js',
+          development: './src/index.ts',
         },
       },
       dependencies: {
@@ -225,6 +201,14 @@ describe('ts-reference-based not publishable package', () => {
     expect(packageJson.files).toBeUndefined();
     // Should not have CJS exports (require field) since publishable is false
     expect(packageJson.exports['.'].require).toBeUndefined();
+  });
+
+  it('should generate expected package.json', async () => {
+    await pkgGenerator(tree, options);
+    const packageJson = tree
+      .read('packages/foo/bar-baz/package.json')
+      ?.toString();
+    expect(packageJson).toMatchSnapshot();
   });
 
   it('should not create project.json', async () => {
@@ -549,6 +533,7 @@ function createEmptyReferenceBasedWorkspace() {
     compilerOptions: {
       composite: true,
       declaration: true,
+      customConditions: ['development'],
     },
   });
 

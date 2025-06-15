@@ -1,0 +1,54 @@
+{
+  "name": "@space-architects/util-drizzle",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js",
+      "development": "./src/index.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "name": "util-drizzle",
+    "tags": [
+      "npm:public"
+    ]
+  },
+  "peerDependencies": {
+    "uuid": "^11.1.0",
+    "drizzle-orm": "^0.44.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/space-architects/space-architects#readme",
+  "bugs": {
+    "url": "https://github.com/space-architects/space-architects/issues"
+  },
+  "author": "Space Architects",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/space-architects/space-architects.git",
+    "directory": "packages/util/drizzle"
+  },
+  "keywords": [
+    "drizzle",
+    "drizzle-orm",
+    "space-architects",
+    "util",
+    "uuidv7",
+    "lazy"
+  ]
+}

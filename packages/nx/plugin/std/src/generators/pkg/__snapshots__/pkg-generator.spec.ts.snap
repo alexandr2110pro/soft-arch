@@ -91,6 +91,48 @@ export default defineConfig(() => ({
 "
 `;
 
+exports[`ts-reference-based not publishable package > should generate expected package.json 1`] = `
+"{
+  "name": "@ns/foo-bar-baz",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "nx": {
+    "name": "foo-bar-baz",
+    "targets": {
+      "lint": {
+        "executor": "@nx/eslint:lint"
+      },
+      "test": {
+        "executor": "@nx/vite:test",
+        "outputs": [
+          "{options.reportsDirectory}"
+        ],
+        "options": {
+          "reportsDirectory": "../../../coverage/packages/foo/bar-baz"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
+"
+`;
+
 exports[`ts-reference-based not publishable package > should generate expected vite.config.ts 1`] = `
 "import { defineConfig } from 'vite';
 
@@ -115,6 +157,82 @@ export default defineConfig(() => ({
     },
   },
 }));
+"
+`;
+
+exports[`ts-reference-based publishable package > should generate expected package.json 1`] = `
+"{
+  "name": "@ns/foo-bar-baz",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js",
+      "development": "./src/index.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "name": "foo-bar-baz",
+    "targets": {
+      "build": {
+        "executor": "@nx/vite:build",
+        "outputs": [
+          "{options.outputPath}"
+        ],
+        "defaultConfiguration": "production",
+        "options": {
+          "outputPath": "packages/foo/bar-baz/dist"
+        },
+        "configurations": {
+          "development": {
+            "mode": "development"
+          },
+          "production": {
+            "mode": "production"
+          }
+        }
+      },
+      "test": {
+        "executor": "@nx/vite:test",
+        "outputs": [
+          "{options.reportsDirectory}"
+        ],
+        "options": {
+          "reportsDirectory": "../../../coverage/packages/foo/bar-baz"
+        }
+      },
+      "lint": {
+        "executor": "@nx/eslint:lint"
+      }
+    }
+  },
+  "dependencies": {},
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/space-architects/space-architects",
+  "bugs": {
+    "url": "https://github.com/space-architects/space-architects/issues"
+  },
+  "author": "Space Architects",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/space-architects/space-architects.git",
+    "directory": "packages/foo/bar-baz"
+  }
+}
 "
 `;
 
