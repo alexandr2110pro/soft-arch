@@ -68,6 +68,14 @@ git commit -m "docs(workspace): improve commit rules clarity" -m "- Clarify that
 git commit -m $'feat(scope): description\n\n- First bullet point\n- Second bullet point\n- Third bullet point\n\n<other content>'
 ```
 
+### Process:
+
+- analyze changes
+- group changes by package / module
+- call nx_mcp to correlate changes with package names
+- compose commit message following the outlined rules
+- commit changes to git
+
 -------------------------------------------------------------------------
      ALL RULES ABOVE ARE MORE IMPORTANT THAN RULES BELOW THIS LINE
 -------------------------------------------------------------------------
