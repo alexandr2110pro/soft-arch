@@ -1,3 +1,13 @@
+## 1.1.0 (2025-06-15)
+
+### 🚀 Features
+
+- **util-drizzle,nx-plugin-std:** add util-drizzle package and update pkg generator ([9a0aef5](https://github.com/space-architects/space-architects/commit/9a0aef5))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 # 1.0.0 (2025-06-15)
 
 ### 🚀 Features
