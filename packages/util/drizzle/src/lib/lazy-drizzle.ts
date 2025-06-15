@@ -9,11 +9,13 @@
  *
  * @example
  * ```ts
+ * // drizzle is not initialized here
  * const db = lazyDrizzle(drizzle, () => process.env.DATABASE_URL);
- * const connectionUrl = await getConnectionUrl();
  *
- * // Mist be fine
- * const [user] =await db.select().from(users).where(eq(users.id, 1));
+ * process.env['DATABASE_URL'] = await getConnectionUrl();
+ *
+ * // drizzle will be initialized only here:
+ * const [user] = await db.select().from(users).where(eq(users.id, 1));
  * ```
  *
  * @param drizzleFactory - A function that creates a drizzle instance

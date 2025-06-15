@@ -24,12 +24,16 @@ Create a lazily initialized Drizzle instance. Useful for serverless environments
 ```typescript
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+
 import { lazyDrizzle } from '@space-architects/util-drizzle';
 
 const db = lazyDrizzle(
   (url) => drizzle(postgres(url)),
   () => process.env.DATABASE_URL
 );
+
+// Before using the db:
+process.env['DATABASE_URL'] = await resolveConnectionString();
 
 // Connection is established only when first query is executed
 const users = await db.select().from(usersTable);
