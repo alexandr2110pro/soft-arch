@@ -1,3 +1,115 @@
+## 0.5.0 (2025-06-15)
+
+### 🚀 Features
+
+- implement automated release system with Nx Release ([2350287](https://github.com/space-architects/space-architects/commit/2350287))
+- **nx-plugin-std:** better publishable pkg generation ([00bb1ad](https://github.com/space-architects/space-architects/commit/00bb1ad))
+- **util-enum,nx-plugin-std,util-ts,workspace:** add enum utilities, major plugin and config updates - Add @space-architects/util-enum package with core enum utilities - Add new generators and refactor structure in nx-plugin-std - Update and extend util-ts utilities - Update workspace configs, docs, and scripts - Remove obsolete generator files and update snapshots - Add and update VSCode and migration configs ([69208f2](https://github.com/space-architects/space-architects/commit/69208f2))
+
+### 📖 Documentation
+
+- add setup instructions for automated release system ([2199bf0](https://github.com/space-architects/space-architects/commit/2199bf0))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
+## 0.4.2 (2025-06-14)
+
+### 🩹 Fixes
+
+- wrong file pointers in package.json ([e2756dd](https://github.com/space-architects/space-architects/commit/e2756dd))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
+## 0.4.1 (2025-06-14)
+
+### 🩹 Fixes
+
+- **util-ts:** add CommonJS export support ([341c97e](https://github.com/space-architects/space-architects/commit/341c97e))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
+## 0.4.0 (2025-06-14)
+
+### 🚀 Features
+
+- **workspace:** add PropTupleFromArray utility and update dependencies ([39dd961](https://github.com/space-architects/space-architects/commit/39dd961))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
+## 0.3.0 (2025-06-14)
+
+### 🚀 Features
+
+- **nx:** add drizzle orm rules and nx config updates ([11eefe7](https://github.com/space-architects/space-architects/commit/11eefe7))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
+## 0.2.0 (2025-06-13)
+
+### 🚀 Features
+
+- **util-enum:** add enum utilities package ([433a2c4](https://github.com/space-architects/space-architects/commit/433a2c4))
+- **util-enum,nx-plugin-std:** add enum suite functionality and improve package generator ([766a3ed](https://github.com/space-architects/space-architects/commit/766a3ed))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
+
+
+## 0.1.2 (2025-06-12)
+
+### 🚀 Features
+
+- **workspace:** enhance cursor rules and configuration ([c18caa3](https://github.com/space-architects/space-architects/commit/c18caa3))
+
+### 💅 Refactors
+
+- **nx-plugin-std:** reorganize generators from init to cfg ([1055327](https://github.com/space-architects/space-architects/commit/1055327))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
+## 0.1.1 (2025-06-12)
+
+### 💅 Refactors
+
+- **nx-plugin-std:** convert eslint config to template file ([b841b50](https://github.com/space-architects/space-architects/commit/b841b50))
+
+### 📖 Documentation
+
+- improve package READMEs with clearer purpose and usage ([4a70f59](https://github.com/space-architects/space-architects/commit/4a70f59))
+
+### ✅ Tests
+
+- **nx-plugin-std:** add comprehensive tests for non-publishable package generation - Add test suite for ts-reference-based not publishable packages - Update snapshots to include non-publishable vite.config.ts - Rename makeStandardPackageJsonSettings to rootPackageJsonBase for clarity - Ensure non-publishable packages don't include publish-related configuration ([f3794b0](https://github.com/space-architects/space-architects/commit/f3794b0))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
+## 0.1.0 (2025-06-11)
+
+### 🚀 Features
+
+- implement automated release system with Nx Release ([2350287](https://github.com/space-architects/space-architects/commit/2350287))
+- **nx-plugin-std:** better publishable pkg generation ([00bb1ad](https://github.com/space-architects/space-architects/commit/00bb1ad))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 # Changelog
 
 This file was generated using [@nx/js:release](https://nx.dev/recipes/nx-release/get-started-with-nx-release) from conventional commits.

@@ -8,7 +8,6 @@ export async function pkgGenerator(tree: Tree, options: PkgGeneratorSchema) {
   const { path, kind, publishable, env } = options;
 
   const name = path.split('/').slice(1).join('-');
-
   switch (kind) {
     case 'ts-reference-based':
       return tsReferenceBased(tree, name, path, publishable, env);

@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Local Registry",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "nx",
+      "runtimeArgs": ["local-registry"],
+      "skipFiles": ["<node_internals>/**", "${workspaceFolder}/node_modules/*"],
+      "outFiles": []
+    }
+  ]
+}

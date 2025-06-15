@@ -11,6 +11,8 @@ on:
 
 env:
   NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+  # Use default registry configuration (will be local verdaccio)
+  # This workflow only prepares the release, doesn't publish
 
 jobs:
   prepare:
@@ -42,32 +44,38 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - uses: nrwl/nx-set-shas@v4
-
-      - name: Configure Git
+      - name: Configure git user
         run: |
-          git config user.name "Release Bot"
-          git config user.email "release-bot@space-architects.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Run Nx Release (Dry Run)
         if: ${{ inputs.dry-run == true }}
         run: |
-          echo "🧪 Running in dry-run mode..."
+          echo "🧪 Running in DRY RUN mode..."
+          echo "This will show what would happen without making actual changes."
           pnpm dlx nx release --dry-run --verbose
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run Nx Release (Production)
+      - name: Run Nx Release (Actual)
         if: ${{ inputs.dry-run == false }}
         run: |
-          echo "🚀 Running production release..."
-          pnpm dlx nx release --skip-publish --verbose
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "🚀 Running ACTUAL release..."
+          echo "This will:"
+          echo "  ✅ Analyze commit history since last release"
+          echo "  ✅ Determine version bump (patch/minor/major)"
+          echo "  ✅ Update all package.json files with new version"
+          echo "  ✅ Generate/update CHANGELOG.md"
+          echo "  ✅ Create release commit and git tag"
+          echo "  ✅ Push changes and tag to GitHub"
+          echo "  ✅ Create GitHub release (triggers publish workflow)"
+          echo ""
+          pnpm dlx nx release --verbose
 
       - name: Release Summary
+        if: ${{ inputs.dry-run == false }}
         run: |
-          echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- **Mode**: ${{ inputs.dry-run == true && 'Dry Run' || 'Production' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Workflow**: Release preparation completed" >> $GITHUB_STEP_SUMMARY
-          echo "- **Next Step**: ${{ inputs.dry-run == false && 'Packages will be published automatically when GitHub release is created' || 'Review changes and run again with dry-run=false' }}" >> $GITHUB_STEP_SUMMARY 
+          echo "✅ Release preparation completed!"
+          echo "🎯 Next steps:"
+          echo "  1. GitHub release created automatically"
+          echo "  2. Publish workflow will trigger and publish to npm"
+          echo "  3. Check Actions tab for publish workflow status" 

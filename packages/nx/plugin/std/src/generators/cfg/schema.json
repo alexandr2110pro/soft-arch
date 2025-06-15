@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Init",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "options": {
+      "description": "The options to apply",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["cursor-rules", "lint"]
+      },
+      "default": ["cursor-rules", "lint"],
+      "x-prompt": {
+        "type": "list",
+        "message": "Select the options you want to apply",
+        "multiselect": true,
+        "items": [
+          {
+            "label": "cursor-rules",
+            "value": "cursor-rules"
+          },
+          {
+            "label": "lint",
+            "value": "lint"
+          }
+        ]
+      }
+    }
+  },
+  "required": ["options"]
+}

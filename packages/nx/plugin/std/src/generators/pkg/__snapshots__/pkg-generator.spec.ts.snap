@@ -1,5 +1,34 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`ts-path-based non-publishable package > should generate expected vite.config.ts 1`] = `
+"import { defineConfig } from 'vite';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
+
+export default defineConfig(() => ({
+  root: __dirname,
+  cacheDir: '../../../node_modules/.vite/packages/foo/bar-baz',
+  plugins: [nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
+  // Uncomment this if you are using workers.
+  // worker: {
+  //  plugins: [ nxViteTsPaths() ],
+  // },
+  test: {
+    passWithNoTests: true,
+    watch: false,
+    globals: true,
+    environment: 'node',
+    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    reporters: ['default'],
+    coverage: {
+      reportsDirectory: '../../../coverage/packages/foo/bar-baz',
+      provider: 'v8' as const,
+    },
+  },
+}));
+"
+`;
+
 exports[`ts-path-based publishable package > should generate expected vite.config.ts 1`] = `
 "/// <reference types='vitest' />
 import { defineConfig } from 'vite';
@@ -62,7 +91,34 @@ export default defineConfig(() => ({
 "
 `;
 
-exports[`ts-reference-based package generator > should generate expected vite.config.ts 1`] = `
+exports[`ts-reference-based not publishable package > should generate expected vite.config.ts 1`] = `
+"import { defineConfig } from 'vite';
+
+export default defineConfig(() => ({
+  root: __dirname,
+  cacheDir: '../../../node_modules/.vite/packages/foo/bar-baz',
+  plugins: [],
+  // Uncomment this if you are using workers.
+  // worker: {
+  //  plugins: [ nxViteTsPaths() ],
+  // },
+  test: {
+    passWithNoTests: true,
+    watch: false,
+    globals: true,
+    environment: 'node',
+    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    reporters: ['default'],
+    coverage: {
+      reportsDirectory: './test-output/vitest/coverage',
+      provider: 'v8' as const,
+    },
+  },
+}));
+"
+`;
+
+exports[`ts-reference-based publishable package > should generate expected vite.config.ts 1`] = `
 "/// <reference types='vitest' />
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';

@@ -6,10 +6,9 @@ import type { PackageJson } from 'nx/src/utils/package-json';
 
 import type { PkgGeneratorSchema } from '../schema';
 
-import { addEnvTypesToTsconfig } from './util/addEnvTypesToTsconfig.js';
 import { addPublishInfoToPackageJson } from './util/addPublishInfoToPackageJson';
-import { updateViteBuildFormats } from './util/updateViteBuildFormats.js';
-import { updateVitestConfig } from './util/updateVitestConfig.js';
+import { updateViteBuildFormats } from './util/updateViteBuildFormats';
+import { updateVitestConfig } from './util/updateVitestConfig';
 
 export async function tsPathsbased(
   tree: Tree,
@@ -28,6 +27,7 @@ export async function tsPathsbased(
     minimal: !publishable,
     publishable,
     skipPackageJson: true,
+    useProjectJson: !publishable,
   };
 
   if (publishable) {
@@ -45,12 +45,10 @@ export async function tsPathsbased(
   }
 
   await libraryGenerator(tree, schema);
-
-  addEnvTypesToTsconfig(tree, path, env);
+  await updateVitestConfig(tree, path, env);
 
   if (publishable) {
     updateViteBuildFormats(tree, path);
-    updateVitestConfig(tree, path, env);
     addPublishInfoToPackageJson(tree, path);
   } else {
     tree.delete(joinPathFragments(path, 'package.json'));

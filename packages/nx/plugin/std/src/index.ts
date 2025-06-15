@@ -1,5 +1,5 @@
-export { initGenerator } from './generators/init/init-generator';
-export type { InitGeneratorSchema } from './generators/init/schema';
+export { cfgGenerator } from './generators/cfg/cfg-generator';
+export type { CfgGeneratorSchema } from './generators/cfg/schema';
 
 export { pkgGenerator } from './generators/pkg/pkg-generator';
 export type { PkgGeneratorSchema } from './generators/pkg/schema';

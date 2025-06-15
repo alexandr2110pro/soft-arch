@@ -1,6 +1,6 @@
 {
   "name": "@space-architects/nx-plugin-std",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Standard Nx plugin for Space Architects workspace",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -8,10 +8,10 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "development": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "default": "./dist/index.js",
+      "development": "./src/index.ts"
     }
   },
   "files": [
@@ -72,7 +72,9 @@
       }
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "zod": "^3.25.61"
+  },
   "peerDependencies": {
     "tslib": ">=2.3.0",
     "vitest": ">=3.2.3",

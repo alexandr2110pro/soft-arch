@@ -1,159 +1,67 @@
-# Release System Setup Instructions
+# Development Setup
 
-This guide will help you configure the automated release system for production use.
+## Prerequisites
 
-## Required GitHub Secrets
+- Node.js 18+
+- pnpm
+- Git
 
-Configure these secrets in your GitHub repository settings:
+## Quick Start
 
-### 1. NPM_ACCESS_TOKEN
+```bash
+# Clone and install
+git clone <repo-url>
+cd space-architects
+pnpm install
 
-**Purpose**: Allows GitHub Actions to publish packages to npm
+# Start local registry for testing packages
+nx local-registry
 
-**Setup Steps**:
-1. Go to [npmjs.com](https://npmjs.com) and log in
-2. Navigate to **Account Settings** → **Access Tokens**
-3. Click **"Generate New Token"** → **"Granular Access Token"**
-4. Configure the token:
-   - **Expiration**: Set appropriate expiration (recommend 1 year)
-   - **Scope**: Select your organization if publishing under an org scope
-   - **Packages**: Grant **Read/Write** access to:
-     - `@space-architects/util-ts`
-     - `@space-architects/nx-plugin-std`
-     - Any other packages you plan to publish
-5. Copy the generated token
-6. In GitHub repository: **Settings** → **Secrets and Variables** → **Actions**
-7. Add **Repository Secret**: `NPM_ACCESS_TOKEN` = `your_token_here`
+# Test a release locally
+nx release --dry-run
+```
 
-### 2. NX_CLOUD_ACCESS_TOKEN (Optional)
+## Publishing Setup (CI/CD)
 
-**Purpose**: Enables Nx Cloud features for faster builds
+### GitHub Secrets Required
 
-**Setup Steps**:
-1. Go to [nx.app](https://nx.app) and connect your repository
-2. Copy your access token from the workspace settings
-3. Add as repository secret: `NX_CLOUD_ACCESS_TOKEN` = `your_token_here`
+Add these secrets in GitHub Settings → Secrets → Actions:
 
-## Repository Configuration
+1. **`NPM_ACCESS_TOKEN`**
+   - Create at [npmjs.com](https://npmjs.com) → Account Settings → Access Tokens
+   - Grant read/write access to `@space-architects/*` packages
 
-### Branch Protection Rules
+### Package Configuration
 
-Configure branch protection for `main`:
+Each publishable package needs:
 
-1. **Settings** → **Branches** → **Add rule**
-2. Branch name pattern: `main`
-3. Enable:
-   - ✅ Require a pull request before merging
-   - ✅ Require status checks to pass before merging
-     - Add status check: `main` (from CI workflow)
-   - ✅ Require branches to be up to date before merging
-   - ✅ Restrict pushes that create files larger than 100MB
+```json
+{
+  "name": "@space-architects/package-name",
+  "version": "0.0.1", 
+  "files": ["dist"],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts"
+}
+```
 
-### Repository Settings
+## Local Testing
 
-1. **General** → **Pull Requests**:
-   - ✅ Allow merge commits
-   - ✅ Allow squash merging
-   - ✅ Allow rebase merging
-   - ✅ Always suggest updating pull request branches
-   - ✅ Automatically delete head branches
+```bash
+# Test package builds
+nx run-many -t build --projects=tag:npm:public
+
+# Test release (no publishing)
+nx release --dry-run
+
+# Publish to local registry
+nx release publish --registry=http://localhost:4873
+```
 
 ## First Release
 
-After setting up secrets, create your first release:
+1. Go to GitHub Actions → "Prepare Release" 
+2. Set `dry-run: false`
+3. Run workflow
 
-### Option A: Automated First Release
-1. Push this commit to main
-2. Go to **Actions** → **"Prepare Release"**
-3. Click **"Run workflow"**
-4. Set `dry-run: false` and run
-5. This will create v0.1.0 and establish the baseline
-
-### Option B: Manual First Release
-```bash
-# Run locally to create initial release
-pnpm dlx nx release --skip-publish --first-release
-
-# Push the changes
-git push --follow-tags
-```
-
-## Testing the System
-
-### Test Release (Dry Run)
-1. Make a commit with conventional format:
-   ```bash
-   git commit -m "feat: add new feature for testing"
-   ```
-2. Go to **Actions** → **"Prepare Release"**
-3. Run with `dry-run: true`
-4. Review the output to ensure it detects changes correctly
-
-### Test Publishing (Local Registry)
-Use the included Verdaccio local registry for testing:
-```bash
-# Start local registry
-pnpm dlx nx local-registry
-
-# In another terminal, test publishing
-pnpm dlx nx release publish --registry=http://localhost:4873
-```
-
-## Monitoring
-
-After setup, monitor these areas:
-
-- **GitHub Actions**: Check workflow runs in Actions tab
-- **GitHub Releases**: Verify releases are created correctly
-- **NPM**: Check packages appear on npmjs.com
-- **Changelog**: Verify CHANGELOG.md is generated properly
-
-## Conventional Commits
-
-Ensure your team uses conventional commit format:
-
-```bash
-# Setup git hooks for commit message validation
-npm install --save-dev @commitlint/config-conventional @commitlint/cli
-echo "export default {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
-
-# Install husky for git hooks
-npm install --save-dev husky
-npx husky init
-echo "npx --no-install commitlint --edit \$1" > .husky/commit-msg
-```
-
-## Troubleshooting
-
-### Common Setup Issues
-
-**1. NPM Token Errors**
-- Ensure token has correct scopes and hasn't expired
-- Verify organization access if using scoped packages
-- Check token format (should start with `npm_`)
-
-**2. GitHub Token Permissions**
-- Default `GITHUB_TOKEN` has sufficient permissions for most operations
-- For advanced scenarios, create a Personal Access Token
-
-**3. Build Failures**
-- Ensure all packages can be built successfully: `pnpm dlx nx run-many -t build`
-- Check TypeScript compilation errors
-- Verify dependencies are correctly declared
-
-**4. First Release Issues**
-- If no tags exist, use `--first-release` flag
-- Ensure conventional commits exist since last tag
-- Check git history is available (not shallow clone)
-
-## Next Steps
-
-Once setup is complete:
-
-1. ✅ Test with a dry-run release
-2. ✅ Create your first production release
-3. ✅ Train team on conventional commit format
-4. ✅ Document your specific release workflow
-5. ✅ Set up monitoring and notifications as needed
-
-The system is now ready for production use! 🚀 
+Done! 🚀 

@@ -5,10 +5,10 @@
       "schema": "./dist/generators/pkg/schema.json",
       "description": "pkg generator"
     },
-    "init": {
-      "factory": "./dist/generators/init/init-generator",
-      "schema": "./dist/generators/init/schema.json",
-      "description": "init generator"
+    "cfg": {
+      "factory": "./dist/generators/cfg/cfg-generator",
+      "schema": "./dist/generators/cfg/schema.json",
+      "description": "Config generator"
     }
   }
 }

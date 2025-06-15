@@ -1,10 +1,11 @@
-import { Tree } from '@nx/devkit';
+import { Tree, addDependenciesToPackageJson } from '@nx/devkit';
 import * as path from 'path';
 import type { ViteUserConfig } from 'vitest/config' with { 'resolution-mode': 'import' };
 
+import { versionResolve } from '../../../cfg/lib/versionResolve';
 import type { PkgGeneratorSchema } from '../../schema';
 
-export function updateVitestConfig(
+export async function updateVitestConfig(
   tree: Tree,
   projectRoot: string,
   env: PkgGeneratorSchema['env'],
@@ -28,6 +29,13 @@ export function updateVitestConfig(
     );
 
   tree.write(viteConfigPath, updatedContent);
+
+  const devDependencies = await versionResolve({
+    '@edge-runtime/types': 'latest',
+    '@edge-runtime/vm': 'latest',
+  });
+
+  addDependenciesToPackageJson(tree, {}, devDependencies, 'package.json');
 }
 
 function intoVitestEnv(

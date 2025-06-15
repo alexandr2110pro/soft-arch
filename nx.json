@@ -76,26 +76,59 @@
     },
     "nx-release-publish": {
       "dependsOn": ["build"],
-      "executor": "@nx/js:release-publish",
-      "options": {
-        "packageRoot": "dist/{projectRoot}"
-      }
+      "executor": "@nx/js:release-publish"
     }
   },
   "release": {
     "projectsRelationship": "fixed",
     "projects": ["packages/**"],
     "releaseTagPattern": "v{version}",
+    "conventionalCommits": {
+      "types": {
+        "feat": {
+          "semverBump": "minor"
+        },
+        "fix": {
+          "semverBump": "patch"
+        },
+        "docs": {
+          "semverBump": "patch"
+        },
+        "style": {
+          "semverBump": "patch"
+        },
+        "refactor": {
+          "semverBump": "patch"
+        },
+        "perf": {
+          "semverBump": "patch"
+        },
+        "test": {
+          "semverBump": "patch"
+        },
+        "build": {
+          "semverBump": "patch"
+        },
+        "ci": {
+          "semverBump": "patch"
+        },
+        "chore": false,
+        "revert": {
+          "semverBump": "patch"
+        }
+      }
+    },
     "git": {
       "commitMessage": "chore: release version {version} [no ci]"
     },
     "version": {
-      "conventionalCommits": true,
-      "preVersionCommand": "pnpm dlx nx run-many -t build --projects=tag:npm:public"
+      "preVersionCommand": "pnpm dlx nx run-many -t build --projects=tag:npm:public",
+      "fallbackCurrentVersionResolver": "disk",
+      "conventionalCommits": true
     },
     "changelog": {
       "workspaceChangelog": {
-        "createRelease": "github",
+        "createRelease": false,
         "file": "CHANGELOG.md",
         "entryWhenNoChanges": false
       },

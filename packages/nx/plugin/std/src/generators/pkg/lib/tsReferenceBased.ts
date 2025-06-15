@@ -5,7 +5,6 @@ import type { LibraryGeneratorSchema } from '@nx/js/src/generators/library/schem
 
 import type { PkgGeneratorSchema } from '../schema';
 
-import { addEnvTypesToTsconfig } from './util/addEnvTypesToTsconfig';
 import { addScopedLocalPackage } from './util/addLocalPackage';
 import { addPublishInfoToPackageJson } from './util/addPublishInfoToPackageJson';
 import { updateViteBuildFormats } from './util/updateViteBuildFormats';
@@ -27,13 +26,13 @@ export async function tsReferenceBased(
     bundler: publishable ? 'vite' : 'tsc',
     minimal: !publishable,
     publishable,
-    skipPackageJson: true,
+    skipPackageJson: false,
+    useProjectJson: false,
   };
 
   await libraryGenerator(tree, schema);
 
-  updateVitestConfig(tree, path, env);
-  addEnvTypesToTsconfig(tree, path, env);
+  await updateVitestConfig(tree, path, env);
 
   if (publishable) {
     // Update vite.config.ts to include both ES and CJS formats

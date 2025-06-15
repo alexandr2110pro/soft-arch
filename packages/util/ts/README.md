@@ -1,11 +1,21 @@
-# util-ts
+# @space-architects/util-ts
 
-This library was generated with [Nx](https://nx.dev).
+TypeScript utility functions and types for Space Architects projects.
 
-## Building
+## Installation
 
-Run `nx build util-ts` to build the library.
+```bash
+npm install @space-architects/util-ts
+# or
+pnpm add @space-architects/util-ts
+```
 
-## Running unit tests
+## Usage
 
-Run `nx test util-ts` to execute the unit tests via [Vitest](https://vitest.dev/).
+```typescript
+import type { /* utilities */ } from '@space-architects/util-ts';
+```
+
+## Contributing
+
+This package is part of the [Space Architects monorepo](../../README.md).

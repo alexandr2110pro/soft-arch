@@ -6,6 +6,8 @@ on:
 
 env:
   NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+  # Override registry for CI to publish to npm
+  NPM_REGISTRY: https://registry.npmjs.org
 
 jobs:
   publish:
@@ -32,7 +34,8 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-          registry-url: https://registry.npmjs.org/
+          # Use npm registry for publishing in CI
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Extract version from tag
         id: version
@@ -52,10 +55,21 @@ jobs:
           git config user.name "Release Bot"
           git config user.email "release-bot@space-architects.com"
 
-      - name: Publish packages to npm
+      - name: Setup npm authentication
         run: |
-          echo "📦 Publishing packages to npm..."
-          pnpm dlx nx release publish --verbose
+          # Configure npm for publishing
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_ACCESS_TOKEN }}" > ~/.npmrc
+          echo "registry=https://registry.npmjs.org" >> ~/.npmrc
+          echo "@space-architects:registry=https://registry.npmjs.org" >> ~/.npmrc
+
+      - name: Verify packages are built
+        run: pnpm dlx nx run-many -t build --projects=tag:npm:public
+
+      - name: Publish to npm
+        run: |
+          # Set npm registry explicitly for publish command
+          export NPM_REGISTRY=https://registry.npmjs.org
+          pnpm dlx nx release publish --registry=https://registry.npmjs.org
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
           NPM_CONFIG_PROVENANCE: true

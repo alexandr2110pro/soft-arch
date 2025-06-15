@@ -1,12 +1,35 @@
-# nx-plugin-std
+# @space-architects/nx-plugin-std
 
-This library was generated with [Nx](https://nx.dev).
+Space Architects Standard Nx for standard Nx workflows
+such as creating packages, initializing config files and frameworks,
+building and deploying apps, and so on.
 
-## Building
+## Installation
 
-Run `nx build nx-plugin-std` to build the library.
+```bash
+npm install -D @space-architects/nx-plugin-std
+# or
+pnpm add -D @space-architects/nx-plugin-std
+```
 
-## Running unit tests
+## Usage
 
-Run `nx test nx-plugin-std` to execute the unit tests via
-[Vitest](https://vitest.dev/).
+Add to your `nx.json` plugins array:
+
+```json
+{
+  "plugins": [
+    "@space-architects/nx-plugin-std"
+  ]
+}
+```
+
+## Features
+
+- Custom generators for project scaffolding
+- Enhanced executors for specialized build processes
+- Workspace automation utilities
+
+## Contributing
+
+This package is part of the [Space Architects monorepo](../../../README.md).
