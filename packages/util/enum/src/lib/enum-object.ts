@@ -2,7 +2,7 @@ export type EnumObject<TName extends readonly string[]> = {
   readonly [K in TName[number]]: K;
 };
 
-export function enumObject<TName extends readonly string[]>(
+export function enumObject<U extends string, TName extends readonly U[]>(
   names: TName,
 ): EnumObject<TName> {
   return Object.freeze(

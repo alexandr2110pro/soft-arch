@@ -21,6 +21,65 @@ yarn add @space-architects/util-enum
 - 🧪 **Well-tested**: Comprehensive test coverage
 - ❄️ **Immutable**: All enum objects are frozen with `Object.freeze()` for runtime safety
 
+## Overview
+
+```typescript
+const ACTIONS = enumObject(['WRITE', 'READ']);
+// ^? Readonly<{ WRITE: 'WRITE', READ: 'READ' }>
+
+const VIEWER_ACTIONS = enumPick(ACTIONS, ['READ']);
+// ^? Readonly<{ READ: 'READ' }>
+
+const USER_READ_ACTIONS = enumPrefixed('USER', enumValues(VIEWER_ACTIONS));
+// ^? Readonly<{ USER_READ: 'USER/READ' }>
+const POST_READ_ACTIONS = enumPrefixed('POST', enumValues(VIEWER_ACTIONS));
+const COMMENT_READ_ACTIONS = enumPrefixed(
+  'COMMENT',
+  enumValues(VIEWER_ACTIONS),
+);
+
+const VIEWER_PERMISSIONS = enumSuiteObject(
+  enumMerge(USER_READ_ACTIONS, COMMENT_READ_ACTIONS, POST_READ_ACTIONS),
+);
+
+type ViewerPermission = typeof VIEWER_PERMISSIONS.$type;
+// ^? [ 'USER/READ', 'COMMENT/READ', 'POST/READ' ]
+
+assert.equal(VIEWER_PERMISSIONS.enum, {
+  COMMENT_READ: 'COMMENT/READ',
+  POST_READ: 'POST/READ',
+  USER_READ: 'USER/READ',
+});
+assert.equal(VIEWER_PERMISSIONS.values, [
+  'USER/READ',
+  'COMMENT/READ',
+  'POST/READ',
+]);
+
+// typesafe checks
+const maybePermission = 'smth' as string;
+
+if (VIEWER_PERMISSIONS.hasValue(maybePermission)) {
+  switch (maybePermission) {
+    case VIEWER_PERMISSIONS.enum.COMMENT_READ:
+      // do something
+      break;
+    case VIEWER_PERMISSIONS.enum.POST_READ:
+      // do something
+      break;
+    case VIEWER_PERMISSIONS.enum.USER_READ:
+      // do something
+      break;
+
+    default:
+      throw new Error('should not happen', {
+        // exhaustiveness check
+        cause: maybePermission satisfies never,
+      });
+  }
+}
+```
+
 ## API Reference
 
 ### `enumObject`
@@ -30,7 +89,7 @@ Creates an enum-like object where keys and values are identical.
 ```typescript
 import { enumObject, type EnumInferFromObject } from '@space-architects/util-enum';
 
-const Status = enumObject(['pending', 'approved', 'rejected'] as const);
+const Status = enumObject(['pending', 'approved', 'rejected']);
 // ^? Readonly<{ pending: 'pending', approved: 'approved', rejected: 'rejected' }>
 
 // Type-safe usage
@@ -43,24 +102,25 @@ type StatusType = EnumInferFromObject<typeof Status>
 
 ### `enumMerge`
 
-Merges two enum objects into a single enum object.
+Merges any number of enum objects into a single enum object.
 
 ```typescript
 import { enumMerge, enumObject } from '@space-architects/util-enum';
 
-const Colors = enumObject(['green', 'red'] as const);
-const Sizes = { small: 'small', large: 'large' } as const;
+const Colors = enumObject(['green', 'red']);
+const Sizes = enumObject(['small', 'large']);
+const Status = enumObject(['active', 'inactive']);
 
-const Combined = enumMerge(Colors, Sizes);
-// Result: { red: 'red', blue: 'blue', small: 'small', large: 'large' }
+const Combined = enumMerge(Colors, Sizes, Status);
+// Result: { green: 'green', red: 'red', small: 'small', large: 'large', active: 'active', inactive: 'inactive' }
 ```
 
-### `enumPickKeys`
+### `enumPick`
 
 Creates a new enum object by picking specific keys from an existing enum.
 
 ```typescript
-import { enumPickKeys } from '@space-architects/util-enum';
+import { enumPick } from '@space-architects/util-enum';
 
 const AllStatus = {
   pending: 'pending',
@@ -68,22 +128,35 @@ const AllStatus = {
   rejected: 'rejected'
 } as const;
 
-const ActiveStatus = enumPickKeys(
+const ActiveStatus = enumPick(
   AllStatus,
-  ['pending', 'approved'] as const
+  ['pending', 'approved']
 );
 // Result: { pending: 'pending', approved: 'approved' }
 ```
 
 ### `enumPrefixed`
 
-Creates an enum object with prefixed values.
+Creates an enum object with prefixed keys and values.
 
 ```typescript
 import { enumPrefixed } from '@space-architects/util-enum';
 
 const Actions = enumPrefixed('user', ['create', 'update', 'delete'] as const);
-// Result: { create: 'user/create', update: 'user/update', delete: 'user/delete' }
+// Result: { user_create: 'user/create', user_update: 'user/update', user_delete: 'user/delete' }
+```
+
+### `enumValues`
+
+Extracts the values from an enum object as a strongly-typed array.
+
+```typescript
+import { enumValues, enumObject } from '@space-architects/util-enum';
+
+const Status = enumObject(['pending', 'approved', 'rejected'] as const);
+const statusValues = enumValues(Status);
+// Result: ['pending', 'approved', 'rejected']
+// Type: ('pending' | 'approved' | 'rejected')[]
 ```
 
 ### `enumSuiteObject` and `enumSuiteTuple`
@@ -95,7 +168,7 @@ import { enumSuiteObject, enumSuiteTuple, enumObject } from '@space-architects/u
 
 // Using enumSuiteTuple
 const [StatusEnum, STATUS_ENUM_VALUES, isStatusEnum] = enumSuiteTuple(
-  enumObject(['pending', 'approved', 'rejected'] as const)
+  enumObject(['pending', 'approved', 'rejected'])
 );
 
 console.log(StatusEnum.pending); // 'pending'
@@ -105,13 +178,13 @@ console.log(isStatusEnum('invalid')); // false
 
 // Using enumSuiteObjec
 const StatusEnumSuite = enumSuiteObject(
-  enumObject(['pending', 'approved', 'rejected'] as const)
+  enumObject(['pending', 'approved', 'rejected'])
 );
 
 console.log(StatusEnumSuite.enum.pending); // 'pending'
 console.log(StatusEnumSuite.values); // ['pending', 'approved', 'rejected']
-console.log(StatusEnumSuite.is('pending')); // true
-console.log(StatusEnumSuite.is('invalid')); // false
+console.log(StatusEnumSuite.hasValue('pending')); // true
+console.log(StatusEnumSuite.hasValue('invalid')); // false
 ```
 
 ### Type Utilities
@@ -139,48 +212,6 @@ const Status = enumObject(['pending', 'approved', 'rejected'] as const);
 type StatusType = EnumInferFromObject<typeof Status>;
 // Result: 'pending' | 'approved' | 'rejected'
 ```
-
-## Common Patterns
-
-### Creating a Status Enum
-
-**with tuple**
-```typescript
-const [OrderStatus, OrderStatusValues, isOrderStatus] = enumSuiteTuple(
-  enumObject(['pending', 'processing', 'shipped', 'delivered', 'cancelled'] as const)
-);
-```
-**with object**
-```typescript
-const OrderStatusEnum = enumSuiteObject(
-  enumObject(['pending', 'processing', 'shipped', 'delivered', 'cancelled'] as const)
-);
-OrderStatusEnum.enum.pending // 'pending'
-OrderStatusEnum.is('irrelevant') // false
-OrderStatusEnum.values 
-// ^? ['pending', 'processing', 'shipped', 'delivered', 'cancelled']
-```
-
-### Filtering Enum Values
-
-```typescript
-import { enumObject, enumPickKeys } from '@space-architects/util-enum';
-
-const AllPermissions = enumObject([
-  'read',
-  'write',
-  'delete',
-  'admin',
-  'super_admin'
-] as const);
-
-// Create a subset for regular users
-const UserPermissions = enumPickKeys(AllPermissions, ['read', 'write'] as const);
-
-// Create a subset for moderators
-const ModeratorPermissions = enumPickKeys(AllPermissions, ['read', 'write', 'delete'] as const);
-```
-
 
 ## Dependencies
 

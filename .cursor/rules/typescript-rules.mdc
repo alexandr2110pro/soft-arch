@@ -1,11 +1,12 @@
 ---
-description: USE WHEN editing/creating/writing/engineering/architecting any TypeScript (.ts or .tsx) Code
+description:
 globs: 
 alwaysApply: true
 ---
 # TypeScript Rules
 
-These rules relevant to any typescript-related work and should be applied on top of the @core.mdc rules
+USE WHEN editing/creating/updating/modifying/writing any TypeScript (*.ts or *.tsx) Code
+
 
 ## MCP Context & Documentation Lookup
 - **Context First:** Always query MCP documentation tools (e.g. `context7`) for the latest official docs, examples, and type definitions.
