@@ -1,3 +1,13 @@
+## 1.1.3 (2025-06-15)
+
+### 📖 Documentation
+
+- **workspace,nx-plugin-std:** improve rules clarity and consistency ([cf97cde](https://github.com/space-architects/space-architects/commit/cf97cde))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.1.2 (2025-06-15)
 
 ### 📖 Documentation
