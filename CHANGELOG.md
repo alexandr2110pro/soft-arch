@@ -1,3 +1,17 @@
+## 1.1.2 (2025-06-15)
+
+### 📖 Documentation
+
+- **workspace:** add commit process guidelines ([7504e69](https://github.com/space-architects/space-architects/commit/7504e69))
+
+### 📦 Build
+
+- **util-drizzle:** add drizzle-orm/pg-core to external deps ([a0a5d86](https://github.com/space-architects/space-architects/commit/a0a5d86))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.1.1 (2025-06-15)
 
 ### 📦 Build
