@@ -1,6 +1,6 @@
 {
   "name": "@space-architects/util-ts",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "TypeScript utilities for Space Architects",
   "type": "module",
   "main": "./dist/index.cjs",

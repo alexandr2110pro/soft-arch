@@ -1,3 +1,17 @@
+# 1.0.0 (2025-06-15)
+
+### 🚀 Features
+
+- ⚠️  **util-enum,util-ts:** enhance enum utilities with breaking changes ([460d1f4](https://github.com/space-architects/space-architects/commit/460d1f4))
+
+### ⚠️  Breaking Changes
+
+- **util-enum,util-ts:** Function names changed (`enumPickKeys` → `enumPick`, `is` → `hasValue`), `enumPrefixed` key format changed, and `enumMerge` signature changed to support variadic arguments
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 0.5.0 (2025-06-15)
 
 ### 🚀 Features
