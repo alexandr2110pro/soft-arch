@@ -1,6 +1,6 @@
 {
   "name": "@space-architects/nx-plugin-std",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Standard Nx plugin for Space Architects workspace",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
