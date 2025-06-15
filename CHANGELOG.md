@@ -1,3 +1,13 @@
+## 1.1.1 (2025-06-15)
+
+### 📦 Build
+
+- **util-drizzle,util-enum,util-ts:** update package configs ([6d1aae2](https://github.com/space-architects/space-architects/commit/6d1aae2))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.1.0 (2025-06-15)
 
 ### 🚀 Features
