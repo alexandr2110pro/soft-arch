@@ -36,7 +36,7 @@ export default defineConfig(() => ({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: ['uuid', 'drizzle-orm'],
+      external: ['uuid', 'drizzle-orm', 'drizzle-orm/pg-core'],
     },
   },
   test: {
