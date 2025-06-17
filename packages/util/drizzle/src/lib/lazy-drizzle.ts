@@ -1,5 +1,3 @@
-// TODO: constrain the T to be of some base form of drizzle
-
 /**
  * Create lazily initialized drizzle proxy
  *
@@ -34,11 +32,32 @@ export const lazyDrizzle = <T extends object>(
     return _db;
   };
 
+  // Create a proxy that properly mimics the drizzle instance for entity checks
   return new Proxy({} as T, {
-    get(_, prop) {
+    get(_target, prop) {
       const db = getDb();
       const value = (db as any)[prop as keyof T];
       return typeof value === 'function' ? value.bind(db) : value;
+    },
+
+    getPrototypeOf() {
+      const db = getDb();
+      return Object.getPrototypeOf(db);
+    },
+
+    has(_target, prop) {
+      const db = getDb();
+      return prop in db;
+    },
+
+    ownKeys() {
+      const db = getDb();
+      return Reflect.ownKeys(db);
+    },
+
+    getOwnPropertyDescriptor(_target, prop) {
+      const db = getDb();
+      return Reflect.getOwnPropertyDescriptor(db, prop);
     },
   });
 };

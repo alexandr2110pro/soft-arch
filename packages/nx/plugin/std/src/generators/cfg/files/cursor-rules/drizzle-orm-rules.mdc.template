@@ -55,7 +55,7 @@ USE WHEN need to design/create/improve/analyze/modify database schema or write c
    - Normalization issues
    - Code reusability opportunities
 4. Write report about your findings
-5. **Iterate**: If there is anything to fix/improve - repeat from step "1". If optimal solution is achieved, exit the iteration loop.
+5. **Iterate**: If there is anything to fix/improve - repeat the process until optimal solution is achieved. Otherwise - stop iterating.
 
 ## Common Patterns
 
