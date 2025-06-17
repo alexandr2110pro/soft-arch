@@ -1,3 +1,13 @@
+## 1.2.0 (2025-06-17)
+
+### 🚀 Features
+
+- **util-drizzle:** enhance lazyDrizzle with proper entity type checking ([6ec3771](https://github.com/space-architects/space-architects/commit/6ec3771))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.1.3 (2025-06-15)
 
 ### 📖 Documentation
