@@ -5,3 +5,4 @@ export {
   type PropTupleFromArray,
 } from './lib/PropTupleFromArray.js';
 export { type TupleMerge } from './lib/TupleMerge.js';
+export { type NonEmptyArray } from './lib/NonEmptyArray.js';

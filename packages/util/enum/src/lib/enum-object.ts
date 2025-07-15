@@ -1,14 +1,14 @@
-export type EnumObject<TName extends readonly string[]> = {
-  readonly [K in TName[number]]: K;
+export type EnumObject<TNamesTuple extends readonly string[]> = {
+  readonly [K in TNamesTuple[number]]: K;
 };
 
-export function enumObject<U extends string, TName extends readonly U[]>(
-  names: TName,
-): EnumObject<TName> {
+export function enumObject<U extends string, TNamesTuple extends readonly U[]>(
+  names: TNamesTuple,
+): EnumObject<TNamesTuple> {
   return Object.freeze(
     names.reduce(
       (res, key) => Object.assign(res, { [key]: key }),
-      {} as EnumObject<TName>,
+      {} as EnumObject<TNamesTuple>,
     ),
   );
 }
