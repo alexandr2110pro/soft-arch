@@ -1,3 +1,13 @@
+## 1.3.0 (2025-07-15)
+
+### 🚀 Features
+
+- **util-ts:** add NonEmptyArray type export ([20455e9](https://github.com/space-architects/space-architects/commit/20455e9))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.2.0 (2025-06-17)
 
 ### 🚀 Features
