@@ -38,6 +38,19 @@
       "default": false,
       "x-prompt": "Is this package publishable?"
     },
+    "buildable": {
+      "type": "boolean",
+      "description": "Whether the package is buildable",
+      "default": false,
+      "x-prompt": "Is this package buildable?"
+    },
+    "preset": {
+      "type": "string",
+      "description": "The preset this package will use",
+      "default": "node",
+      "enum": ["nextjs", "react", "js"],
+      "x-prompt": "Select the preset this package will use"
+    },
     "env": {
       "type": "string",
       "description": "The environment this package will run in",

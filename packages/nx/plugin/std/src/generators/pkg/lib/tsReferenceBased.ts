@@ -9,6 +9,9 @@ import type { PkgGeneratorSchema } from '../schema';
 
 import { addScopedLocalPackage } from './util/addLocalPackage';
 import { addPublishInfoToPackageJson } from './util/addPublishInfoToPackageJson';
+import { addTsConfigTypes } from './util/addTsConfigTypes';
+import { setNextTsOptions } from './util/setNextTsOptions';
+import { setReactTsOptions } from './util/setRactTsOptions';
 import { updateViteBuildFormats } from './util/updateViteBuildFormats';
 import { updateVitestConfig } from './util/updateVitestConfig';
 
@@ -26,24 +29,49 @@ export async function tsReferenceBased(
   name: string,
   path: string,
   publishable: boolean,
+  buildable: boolean,
   env: PkgGeneratorSchema['env'],
+  preset: PkgGeneratorSchema['preset'],
 ) {
+  if (publishable && !buildable) {
+    throw new Error('Publishable packages must be buildable');
+  }
   const schema: LibraryGeneratorSchema = {
     name,
     directory: path,
     linter: 'eslint' satisfies LinterType,
     unitTestRunner: 'vitest',
     strict: true,
-    bundler: publishable ? 'vite' : 'tsc',
+    bundler: buildable ? 'vite' : 'tsc',
     minimal: !publishable,
     publishable,
     skipPackageJson: false,
     useProjectJson: false,
+    includeBabelRc: preset === 'nextjs' || preset === 'react',
+    addPlugin: true,
   };
 
   await libraryGenerator(tree, schema);
 
   await updateVitestConfig(tree, path, env);
+
+  if (preset === 'nextjs') {
+    addTsConfigTypes(tree, path, [
+      'node',
+      '@nx/react/typings/cssmodule.d.ts',
+      '@nx/react/typings/image.d.ts',
+      'next',
+      '@nx/next/typings/image.d.ts',
+    ]);
+  }
+
+  if (preset === 'react') {
+    setReactTsOptions(tree, path, buildable);
+  }
+
+  if (preset === 'nextjs') {
+    setNextTsOptions(tree, path, buildable);
+  }
 
   if (publishable) {
     // Update vite.config.ts to include both ES and CJS formats
