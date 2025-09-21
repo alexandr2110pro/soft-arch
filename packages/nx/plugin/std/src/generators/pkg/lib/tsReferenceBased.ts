@@ -9,7 +9,6 @@ import type { PkgGeneratorSchema } from '../schema';
 
 import { addScopedLocalPackage } from './util/addLocalPackage';
 import { addPublishInfoToPackageJson } from './util/addPublishInfoToPackageJson';
-import { addTsConfigTypes } from './util/addTsConfigTypes';
 import { setNextTsOptions } from './util/setNextTsOptions';
 import { setReactTsOptions } from './util/setRactTsOptions';
 import { updateViteBuildFormats } from './util/updateViteBuildFormats';
@@ -42,7 +41,7 @@ export async function tsReferenceBased(
     linter: 'eslint' satisfies LinterType,
     unitTestRunner: 'vitest',
     strict: true,
-    bundler: buildable ? 'vite' : 'tsc',
+    bundler: buildable ? 'vite' : 'none',
     minimal: !publishable,
     publishable,
     skipPackageJson: false,
@@ -54,16 +53,6 @@ export async function tsReferenceBased(
   await libraryGenerator(tree, schema);
 
   await updateVitestConfig(tree, path, env);
-
-  if (preset === 'nextjs') {
-    addTsConfigTypes(tree, path, [
-      'node',
-      '@nx/react/typings/cssmodule.d.ts',
-      '@nx/react/typings/image.d.ts',
-      'next',
-      '@nx/next/typings/image.d.ts',
-    ]);
-  }
 
   if (preset === 'react') {
     setReactTsOptions(tree, path, buildable);
