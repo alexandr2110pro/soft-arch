@@ -1,3 +1,13 @@
+## 1.4.1 (2025-09-21)
+
+### 🩹 Fixes
+
+- **nx-plugin-std:** fix buildable lib generation ([be053a7](https://github.com/space-architects/space-architects/commit/be053a7))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.4.0 (2025-09-21)
 
 ### 🚀 Features
