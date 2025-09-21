@@ -1,3 +1,13 @@
+## 1.4.0 (2025-09-21)
+
+### 🚀 Features
+
+- **nx-plugin-std:** add buildable and preset options to package generator ([d26e003](https://github.com/space-architects/space-architects/commit/d26e003))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.3.0 (2025-07-15)
 
 ### 🚀 Features
