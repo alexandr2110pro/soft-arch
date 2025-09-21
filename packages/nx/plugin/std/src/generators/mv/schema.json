@@ -6,7 +6,6 @@
   "properties": {
     "packageName": {
       "type": "string",
-      "pattern": "@com\\/.+",
       "description": "The name of the package to remove",
       "$default": {
         "$source": "argv",
