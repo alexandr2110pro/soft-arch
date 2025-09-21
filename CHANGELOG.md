@@ -1,3 +1,13 @@
+## 1.4.2 (2025-09-21)
+
+### 🩹 Fixes
+
+- **nx-plugin-std:** fix babelrc config for next libs ([b8a6850](https://github.com/space-architects/space-architects/commit/b8a6850))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.4.1 (2025-09-21)
 
 ### 🩹 Fixes

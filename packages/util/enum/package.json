@@ -1,6 +1,6 @@
 {
   "name": "@space-architects/util-enum",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
