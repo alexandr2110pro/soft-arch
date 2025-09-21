@@ -1,13 +1,30 @@
-import { Tree } from '@nx/devkit';
+import { Tree, joinPathFragments } from '@nx/devkit';
 
 import { updateArrayProperty } from './updateArrayProperty';
 import { updateTsConfigLibJson } from './updateTsConfigLibJson';
+
+const BABELRC = `
+{
+  "presets": [
+    [
+      "@nx/react/babel",
+      {
+        "runtime": "automatic",
+        "useBuiltIns": "usage"
+      }
+    ]
+  ],
+  "plugins": []
+}
+`.trim();
 
 export function setReactTsOptions(
   tree: Tree,
   path: string,
   buildable: boolean,
 ) {
+  tree.write(joinPathFragments(path, '.babelrc'), BABELRC);
+
   updateTsConfigLibJson(tree, path, json => {
     json.compilerOptions.jsx = 'react-jsx';
     json.compilerOptions.module = 'esnext';

@@ -46,7 +46,6 @@ export async function tsReferenceBased(
     publishable,
     skipPackageJson: false,
     useProjectJson: false,
-    includeBabelRc: preset === 'nextjs' || preset === 'react',
     addPlugin: true,
   };
 
