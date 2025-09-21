@@ -1,3 +1,13 @@
+## 1.5.0 (2025-09-21)
+
+### 🚀 Features
+
+- **nx-plugin-std:** add mv and rm generators for project management ([36a4e46](https://github.com/space-architects/space-architects/commit/36a4e46))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.4.2 (2025-09-21)
 
 ### 🩹 Fixes
