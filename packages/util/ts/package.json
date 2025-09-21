@@ -13,7 +13,7 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "default": "./dist/index.js",
-      "development": "./src/index.ts"
+      "@space-architects/source": "./src/index.ts"
     }
   },
   "files": [

@@ -3,3 +3,5 @@ packages:
 
 onlyBuiltDependencies:
   - nx
+
+minimumReleaseAge: 120
