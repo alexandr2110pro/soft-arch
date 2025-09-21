@@ -9,7 +9,7 @@ import type { PkgGeneratorSchema } from '../schema';
 
 import { addScopedLocalPackage } from './util/addLocalPackage';
 import { addPublishInfoToPackageJson } from './util/addPublishInfoToPackageJson';
-import { setNextTsOptions } from './util/setNextTsOptions';
+import { setNextTsOptions } from './util/setNextTsOption';
 import { setReactTsOptions } from './util/setRactTsOptions';
 import { updateViteBuildFormats } from './util/updateViteBuildFormats';
 import { updateVitestConfig } from './util/updateVitestConfig';

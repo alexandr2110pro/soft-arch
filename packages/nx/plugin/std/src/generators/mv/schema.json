@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Mv",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "packageName": {
+      "type": "string",
+      "pattern": "@com\\/.+",
+      "description": "The name of the package to remove",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What package name would you like to remove?",
+      "x-dropdown": "projects"
+    },
+    "newPath": {
+      "type": "string",
+      "description": "The new path of the package",
+      "x-prompt": "What is the new path of the package?"
+    }
+  },
+  "required": ["name"]
+}

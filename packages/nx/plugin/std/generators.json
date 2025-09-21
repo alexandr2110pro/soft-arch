@@ -9,6 +9,16 @@
       "factory": "./dist/generators/cfg/cfg-generator",
       "schema": "./dist/generators/cfg/schema.json",
       "description": "Config generator"
+    },
+    "rm": {
+      "factory": "./dist/generators/rm/rm-generator",
+      "schema": "./dist/generators/rm/schema.json",
+      "description": "rm generator"
+    },
+    "mv": {
+      "factory": "./dist/generators/mv/mv-generator",
+      "schema": "./dist/generators/mv/schema.json",
+      "description": "mv generator"
     }
   }
 }

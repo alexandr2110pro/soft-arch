@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Rm",
+  "title": "rm generator",
+  "type": "object",
+  "properties": {
+    "packageName": {
+      "type": "string",
+      "pattern": "@com\\/.+",
+      "description": "The name of the package to remove",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What package name would you like to remove?",
+      "x-dropdown": "projects"
+    }
+  },
+  "required": ["packageName"]
+}
