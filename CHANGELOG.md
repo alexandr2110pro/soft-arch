@@ -1,3 +1,13 @@
+## 1.5.1 (2025-09-21)
+
+### 🩹 Fixes
+
+- **nx-plugin-std:** remove incorrect package name pattern from mv and rm generators ([2f4c4f0](https://github.com/space-architects/space-architects/commit/2f4c4f0))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.5.0 (2025-09-21)
 
 ### 🚀 Features
