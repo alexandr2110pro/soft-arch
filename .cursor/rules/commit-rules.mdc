@@ -9,6 +9,7 @@ alwaysApply: false
 
 ### Common
 
+- DO NOT CONSIDER innternal implementation changes as features or breaking changes if they don't affect the public interface and usage.
 - always deeply analyze all the changes before writing a commit message with a focus on signifficant changes.
 - follow conventional commits specs (listed below)
 - commit body should be brief, short, and concise, including only the very necessary information about the changes in a shortest possible form. Stay technical and use unordered lists.

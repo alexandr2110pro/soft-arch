@@ -1,9 +1,12 @@
-import { type Tree, updateJson } from '@nx/devkit';
-import { removeGenerator } from '@nx/workspace';
+import { type Tree, readProjectConfiguration, updateJson } from '@nx/devkit';
+import { readPackageJson, removeGenerator } from '@nx/workspace';
 
 import { RmGeneratorSchema } from './schema';
 
 export async function rmGenerator(tree: Tree, options: RmGeneratorSchema) {
+  const project = readProjectConfiguration(tree, options.packageName);
+  const importPath = readPackageJson(project.root).name;
+
   await removeGenerator(tree, {
     projectName: options.packageName,
     skipFormat: true,
@@ -11,8 +14,8 @@ export async function rmGenerator(tree: Tree, options: RmGeneratorSchema) {
   });
 
   updateJson(tree, 'package.json', json => {
-    delete json.dependencies[options.packageName];
-    delete json.devDependencies[options.packageName];
+    delete json.dependencies[importPath];
+    delete json.devDependencies[importPath];
     return json;
   });
 }
