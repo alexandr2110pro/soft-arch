@@ -1,3 +1,13 @@
+## 1.5.2 (2025-09-22)
+
+### 💅 Refactors
+
+- **nx-plugin-std:** improve rm generator dependency cleanup ([5ff088e](https://github.com/space-architects/space-architects/commit/5ff088e))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.5.1 (2025-09-21)
 
 ### 🩹 Fixes
