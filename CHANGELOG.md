@@ -1,3 +1,13 @@
+## 1.6.0 (2025-09-23)
+
+### 🚀 Features
+
+- **nx-plugin-std:** add JS preset support and improve TypeScript configuration ([eefc06a](https://github.com/space-architects/space-architects/commit/eefc06a))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.5.2 (2025-09-22)
 
 ### 💅 Refactors
