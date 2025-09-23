@@ -7,6 +7,7 @@ import { z } from 'zod/v4-mini';
 
 import type { PkgGeneratorSchema } from '../schema';
 
+import { setJsTsOptions } from './util/setJsTsOptions';
 import { addScopedLocalPackage } from './util/addLocalPackage';
 import { addPublishInfoToPackageJson } from './util/addPublishInfoToPackageJson';
 import { setNextTsOptions } from './util/setNextTsOption';
@@ -52,6 +53,10 @@ export async function tsReferenceBased(
   await libraryGenerator(tree, schema);
 
   await updateVitestConfig(tree, path, env);
+
+  if (preset === 'js') {
+    setJsTsOptions(tree, path, buildable);
+  }
 
   if (preset === 'react') {
     setReactTsOptions(tree, path, buildable);
