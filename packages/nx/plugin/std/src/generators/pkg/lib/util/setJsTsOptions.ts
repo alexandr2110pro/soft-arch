@@ -8,6 +8,7 @@ export function setJsTsOptions(tree: Tree, path: string, buildable: boolean) {
   updateTsConfigSpecJson(tree, path, json => {
     json.compilerOptions.module = 'esnext';
     json.compilerOptions.moduleResolution = 'bundler';
+    return json;
   });
 
   updateTsConfigLibJson(tree, path, json => {
