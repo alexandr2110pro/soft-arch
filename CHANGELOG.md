@@ -1,3 +1,13 @@
+## 1.6.1 (2025-10-02)
+
+### 🩹 Fixes
+
+- **nx-plugin-std:** add missing return statement in setJsTsOptions ([8181075](https://github.com/space-architects/space-architects/commit/8181075))
+
+### ❤️ Thank You
+
+- Alexandr Cherednichenko @alexandr2110pro
+
 ## 1.6.0 (2025-09-23)
 
 ### 🚀 Features
