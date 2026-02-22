@@ -5,7 +5,7 @@ import { tsReferenceBased } from './lib/tsReferenceBased';
 import type { PkgGeneratorSchema } from './schema';
 
 export async function pkgGenerator(tree: Tree, options: PkgGeneratorSchema) {
-  const { path, kind, publishable, env, buildable, preset } = options;
+  const { path, kind, publishable, env, buildable = false, preset } = options;
 
   const name = path.split('/').slice(1).join('-');
   switch (kind) {

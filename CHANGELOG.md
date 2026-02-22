@@ -1,3 +1,6 @@
+> As of the switch to independent versioning, per-package changelogs are maintained
+> in each package's directory. This file is no longer updated.
+
 ## 1.6.1 (2025-10-02)
 
 ### 🩹 Fixes

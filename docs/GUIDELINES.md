@@ -413,7 +413,7 @@ Project names are defined in `package.json` under `"nx": { "name": "..." }`:
 ### Publishing
 
 - Only packages tagged `npm:public` in `package.json` `nx.tags` are published to npm
-- All packages share a **fixed version** (bumped together on every release)
+- Each package is **independently versioned** -- only packages with changes are bumped on release
 - Packages emit **dual output**: ESM (`.js`) + CJS (`.cjs`) + TypeScript declarations (`.d.ts`)
 - Each package exposes a `@soft-arch/source` custom export condition pointing to TypeScript source (used for in-monorepo development)
 

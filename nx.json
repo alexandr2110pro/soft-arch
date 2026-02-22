@@ -85,45 +85,25 @@
     }
   },
   "release": {
-    "projectsRelationship": "fixed",
+    "projectsRelationship": "independent",
     "projects": ["packages/**"],
     "conventionalCommits": {
       "types": {
-        "feat": {
-          "semverBump": "minor"
-        },
-        "fix": {
-          "semverBump": "patch"
-        },
-        "docs": {
-          "semverBump": "patch"
-        },
-        "style": {
-          "semverBump": "patch"
-        },
-        "refactor": {
-          "semverBump": "patch"
-        },
-        "perf": {
-          "semverBump": "patch"
-        },
-        "test": {
-          "semverBump": "patch"
-        },
-        "build": {
-          "semverBump": "patch"
-        },
-        "ci": {
-          "semverBump": "patch"
-        },
+        "feat": { "semverBump": "minor" },
+        "fix": { "semverBump": "patch" },
+        "docs": { "semverBump": "patch" },
+        "style": { "semverBump": "patch" },
+        "refactor": { "semverBump": "patch" },
+        "perf": { "semverBump": "patch" },
+        "test": { "semverBump": "patch" },
+        "build": { "semverBump": "patch" },
+        "ci": { "semverBump": "patch" },
         "chore": false,
-        "revert": {
-          "semverBump": "patch"
-        }
+        "revert": { "semverBump": "patch" }
       }
     },
     "git": {
-      "commitMessage": "chore: release version {version} [no ci]"
+      "commitMessage": "chore(release): bump versions [no ci]"
     },
     "version": {
       "preVersionCommand": "pnpm dlx nx run-many -t build --projects=tag:npm:public",
@@ -131,15 +111,16 @@
       "conventionalCommits": true
     },
     "changelog": {
-      "workspaceChangelog": {
-        "createRelease": false,
-        "file": "CHANGELOG.md",
-        "entryWhenNoChanges": false
-      },
-      "projectChangelogs": false
+      "workspaceChangelog": false,
+      "projectChangelogs": {
+        "entryWhenNoChanges": false,
+        "renderOptions": {
+          "authors": true
+        }
+      }
     },
     "releaseTag": {
-      "pattern": "v{version}"
+      "pattern": "{projectName}@{version}"
     }
   }
 }

@@ -1,18 +1,21 @@
 import { Tree, addDependenciesToPackageJson } from '@nx/devkit';
-import * as path from 'path';
-import type { ViteUserConfig } from 'vitest/config' with { 'resolution-mode': 'import' };
+import type { ViteUserConfig } from 'vitest/config' with {
+  'resolution-mode': 'import',
+};
 
 import { versionResolve } from '../../../cfg/lib/versionResolve';
 import type { PkgGeneratorSchema } from '../../schema';
+
+import { resolveViteConfigPath } from './resolveViteConfigPath.js';
 
 export async function updateVitestConfig(
   tree: Tree,
   projectRoot: string,
   env: PkgGeneratorSchema['env'],
 ) {
-  const viteConfigPath = path.join(projectRoot, 'vite.config.ts');
+  const viteConfigPath = resolveViteConfigPath(tree, projectRoot);
 
-  if (!tree.exists(viteConfigPath)) return;
+  if (!viteConfigPath) return;
 
   const viteConfigContent = tree.read(viteConfigPath, 'utf-8');
   if (!viteConfigContent) return;

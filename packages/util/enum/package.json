@@ -36,6 +36,9 @@
     "directory": "packages/util/enum"
   },
   "nx": {
-    "name": "util-enum"
+    "name": "util-enum",
+    "tags": [
+      "npm:public"
+    ]
   }
 }

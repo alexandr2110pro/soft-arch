@@ -29,9 +29,13 @@ nx run-many -t build --projects=tag:npm:public
 # Run only tasks affected by uncommitted changes
 nx affected -t lint test build
 
+# Preview next release (independent versioning)
+nx release --dry-run
+
 # Local registry (Verdaccio on :4873) for testing releases
 nx local-registry
-nx release --dry-run
+nx release --skip-publish --first-release     # first time only
+nx release --skip-publish                     # subsequent releases
 nx release publish --registry=http://localhost:4873
 ```
 
@@ -51,7 +55,7 @@ packages/
     std/       → @soft-arch/nx-plugin-std – workspace generators (pkg, cfg, mv, rm)
 ```
 
-All packages share a **fixed version** (bumped together on every release). Only packages tagged `npm:public` in their `package.json` `nx.tags` are published to npm.
+Each package is **independently versioned** -- only packages with changes (or dependency updates) are bumped on release. Per-package changelogs are maintained in each package's directory. Only packages tagged `npm:public` in their `package.json` `nx.tags` are published to npm.
 
 ### Build pipeline
 
@@ -78,7 +82,7 @@ Prettier enforces import order (via `@trivago/prettier-plugin-sort-imports`):
 
 ### Versioning & release
 
-Releases are triggered manually via GitHub Actions ("Prepare Release" workflow). Conventional commits determine the version bump -- all commit types other than `chore` produce a release (`feat` -> minor, everything else -> patch, `feat!` / `BREAKING CHANGE` -> major). See RELEASE.md for details.
+Releases are triggered manually via GitHub Actions ("Release" workflow). Each package is independently versioned. Conventional commits determine the version bump -- all commit types other than `chore` produce a release (`feat` -> minor, everything else -> patch, `feat!` / `BREAKING CHANGE` -> major). Use scoped commits (e.g., `feat(util-ts):`) to target specific packages. See RELEASE.md for details.
 
 ## Additional Guidelines
 

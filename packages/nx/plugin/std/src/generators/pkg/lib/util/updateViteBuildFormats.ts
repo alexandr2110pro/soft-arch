@@ -1,14 +1,16 @@
-import { Tree, joinPathFragments } from '@nx/devkit';
+import { Tree } from '@nx/devkit';
+
+import { resolveViteConfigPath } from './resolveViteConfigPath.js';
 
 /**
- * Updates the vite.config.ts file to include both ES and CJS formats
+ * Updates the vite config file to include both ES and CJS formats
  * @param tree - The NX Tree instance
  * @param path - The path to the project directory
  */
 export function updateViteBuildFormats(tree: Tree, path: string): void {
-  const viteConfigPath = joinPathFragments(path, 'vite.config.ts');
+  const viteConfigPath = resolveViteConfigPath(tree, path);
 
-  if (tree.exists(viteConfigPath)) {
+  if (viteConfigPath) {
     const viteConfig = tree.read(viteConfigPath, 'utf-8');
 
     if (viteConfig) {

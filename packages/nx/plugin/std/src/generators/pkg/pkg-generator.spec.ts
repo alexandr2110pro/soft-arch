@@ -7,6 +7,7 @@ import {
 } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 
+import { resolveViteConfigPath } from './lib/util/resolveViteConfigPath.js';
 import { pkgGenerator } from './pkg-generator.js';
 import type { PkgGeneratorSchema } from './schema.js';
 
@@ -38,6 +39,7 @@ describe('ts-reference-based publishable package', () => {
     path: 'packages/foo/bar-baz',
     kind: 'ts-reference-based',
     publishable: true,
+    buildable: true,
     env: 'node',
   };
 
@@ -86,37 +88,35 @@ describe('ts-reference-based publishable package', () => {
 
   it('should generate expected vite.config.ts', async () => {
     await pkgGenerator(tree, options);
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toMatchSnapshot();
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toMatchSnapshot();
   });
 
   it('should configure vite to build both esm and cjs', async () => {
     await pkgGenerator(tree, options);
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`formats: ['es' as const, 'cjs' as const],`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `formats: ['es' as const, 'cjs' as const],`,
+    );
   });
 
   it('should configure vitest to pass with no tests', async () => {
     await pkgGenerator(tree, options);
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`passWithNoTests: true,`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `passWithNoTests: true,`,
+    );
   });
 
   it('should configure configure jsdom environment, if env is jsdom', async () => {
     await pkgGenerator(tree, { ...options, env: 'jsdom' });
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`environment: 'jsdom',`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `environment: 'jsdom',`,
+    );
   });
 
   it('should configure configure edge environment, if env is edge', async () => {
     await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`environment: 'edge-runtime',`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `environment: 'edge-runtime',`,
+    );
   });
 
   it('should add @edge-runtime/vm and @edge-runtime/types to the package.json if env is edge', async () => {
@@ -176,21 +176,17 @@ describe('ts-reference-based not publishable package', () => {
       version: '0.0.1',
       private: true,
       type: 'module',
-      main: './dist/index.js',
-      module: './dist/index.js',
-      types: './dist/index.d.ts',
+      main: './src/index.ts',
+      types: './src/index.ts',
       exports: {
         './package.json': './package.json',
         '.': {
-          types: './dist/index.d.ts',
-          import: './dist/index.js',
-          default: './dist/index.js',
-          development: './src/index.ts',
+          types: './src/index.ts',
+          import: './src/index.ts',
+          default: './src/index.ts',
         },
       },
-      dependencies: {
-        tslib: '^2.3.0',
-      },
+      dependencies: {},
       nx: expect.objectContaining({
         name: 'foo-bar-baz',
       }),
@@ -218,9 +214,7 @@ describe('ts-reference-based not publishable package', () => {
 
   it('should generate expected vite.config.ts', async () => {
     await pkgGenerator(tree, options);
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toMatchSnapshot();
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toMatchSnapshot();
   });
 
   it('should generate vite.config.ts with test configuration only', async () => {
@@ -236,23 +230,23 @@ describe('ts-reference-based not publishable package', () => {
 
   it('should configure vitest to pass with no tests', async () => {
     await pkgGenerator(tree, options);
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`passWithNoTests: true,`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `passWithNoTests: true,`,
+    );
   });
 
   it('should configure configure jsdom environment, if env is jsdom', async () => {
     await pkgGenerator(tree, { ...options, env: 'jsdom' });
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`environment: 'jsdom',`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `environment: 'jsdom',`,
+    );
   });
 
   it('should configure configure edge environment, if env is edge', async () => {
     await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`environment: 'edge-runtime',`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `environment: 'edge-runtime',`,
+    );
   });
 
   it('should create project with minimal configuration', async () => {
@@ -266,8 +260,8 @@ describe('ts-reference-based not publishable package', () => {
     // Should not have build target since it's not publishable
     expect(projectConfig.targets?.build).toBeUndefined();
 
-    // Test target should use vite executor for running tests
-    expect(projectConfig.targets?.test?.executor).toBe('@nx/vite:test');
+    // Test target should use vitest executor for running tests
+    expect(projectConfig.targets?.test?.executor).toBe('@nx/vitest:test');
   });
 
   it('should not have publish-related npm scripts or configuration', async () => {
@@ -353,23 +347,21 @@ describe('ts-path-based publishable package', () => {
 
   it('should generate expected vite.config.ts', async () => {
     await pkgGenerator(tree, options);
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toMatchSnapshot();
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toMatchSnapshot();
   });
 
   it('should configure vite to build both esm and cjs, if publishable', async () => {
     await pkgGenerator(tree, options);
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`formats: ['es' as const, 'cjs' as const],`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `formats: ['es' as const, 'cjs' as const],`,
+    );
   });
 
   it('should configure vitest to pass with no tests', async () => {
     await pkgGenerator(tree, options);
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`passWithNoTests: true,`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `passWithNoTests: true,`,
+    );
   });
 
   it('should not add the package to the root package.json', async () => {
@@ -379,16 +371,16 @@ describe('ts-path-based publishable package', () => {
 
   it('should configure configure jsdom environment if env is jsdom', async () => {
     await pkgGenerator(tree, { ...options, env: 'jsdom' });
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`environment: 'jsdom',`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `environment: 'jsdom',`,
+    );
   });
 
   it('should configure configure edge environment if env is edge', async () => {
     await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`environment: 'edge-runtime',`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `environment: 'edge-runtime',`,
+    );
   });
 
   it('should add @edge-runtime/types and @edge-runtime/vm to the package.json if env is edge', async () => {
@@ -457,9 +449,9 @@ describe('ts-path-based non-publishable package', () => {
 
   it('should configure vitest to pass with no tests', async () => {
     await pkgGenerator(tree, options);
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`passWithNoTests: true,`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `passWithNoTests: true,`,
+    );
   });
 
   it('should not add the package to the root package.json', async () => {
@@ -469,16 +461,16 @@ describe('ts-path-based non-publishable package', () => {
 
   it('should configure jsdom environment if env is jsdom', async () => {
     await pkgGenerator(tree, { ...options, env: 'jsdom' });
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`environment: 'jsdom',`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `environment: 'jsdom',`,
+    );
   });
 
   it('should configure edge environment if env is edge', async () => {
     await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toContain(`environment: 'edge-runtime',`);
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+      `environment: 'edge-runtime',`,
+    );
   });
 
   it('should add @edge-runtime/types and @edge-runtime/vm to the package.json if env is edge', async () => {
@@ -491,9 +483,7 @@ describe('ts-path-based non-publishable package', () => {
 
   it('should generate expected vite.config.ts', async () => {
     await pkgGenerator(tree, options);
-    expect(
-      tree.read('packages/foo/bar-baz/vite.config.ts')?.toString(),
-    ).toMatchSnapshot();
+    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toMatchSnapshot();
   });
 });
 
@@ -547,6 +537,11 @@ function createEmptyReferenceBasedWorkspace() {
   tree.write('pnpm-workspace.yaml', '');
 
   return tree;
+}
+
+function readViteConfig(tree: Tree, projectRoot: string): string | undefined {
+  const configPath = resolveViteConfigPath(tree, projectRoot);
+  return configPath ? tree.read(configPath)?.toString() : undefined;
 }
 
 function rootPackageJsonBase() {

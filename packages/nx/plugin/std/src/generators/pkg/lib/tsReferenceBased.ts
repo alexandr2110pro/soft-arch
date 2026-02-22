@@ -7,9 +7,9 @@ import { z } from 'zod/v4-mini';
 
 import type { PkgGeneratorSchema } from '../schema';
 
-import { setJsTsOptions } from './util/setJsTsOptions';
 import { addScopedLocalPackage } from './util/addLocalPackage';
 import { addPublishInfoToPackageJson } from './util/addPublishInfoToPackageJson';
+import { setJsTsOptions } from './util/setJsTsOptions';
 import { setNextTsOptions } from './util/setNextTsOption';
 import { setReactTsOptions } from './util/setRactTsOptions';
 import { updateViteBuildFormats } from './util/updateViteBuildFormats';
@@ -47,7 +47,6 @@ export async function tsReferenceBased(
     publishable,
     skipPackageJson: false,
     useProjectJson: false,
-    addPlugin: true,
   };
 
   await libraryGenerator(tree, schema);
