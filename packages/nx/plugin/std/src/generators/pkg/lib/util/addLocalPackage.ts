@@ -35,7 +35,7 @@ export function addLocalPackage(
 /**
  * Extracts the scope from the root package.json name field
  * @param tree - The NX Tree instance
- * @returns The scope (e.g., '@space-architects') or null if no scope
+ * @returns The scope (e.g., '@soft-arch') or null if no scope
  */
 function getWorkspaceScope(tree: Tree): string | null {
   const rootPackageJson = readJson(tree, 'package.json');

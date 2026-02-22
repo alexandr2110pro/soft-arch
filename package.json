@@ -1,5 +1,5 @@
 {
-  "name": "@space-architects/source",
+  "name": "@soft-arch/source",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -8,18 +8,18 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/space-architects/space-architects.git",
+    "url": "https://github.com/alexandr2110pro/soft-arch.git",
     "directory": "."
   },
-  "homepage": "https://github.com/space-architects/space-architects#readme",
+  "homepage": "https://github.com/alexandr2110pro/soft-arch#readme",
   "bugs": {
-    "url": "https://github.com/space-architects/space-architects/issues"
+    "url": "https://github.com/alexandr2110pro/soft-arch/issues"
   },
-  "author": "Space Architects",
+  "author": "SoftArch",
   "dependencies": {
-    "@space-architects/util-drizzle": "workspace:*",
-    "@space-architects/util-enum": "workspace:*",
-    "@space-architects/util-ts": "workspace:*",
+    "@soft-arch/util-drizzle": "workspace:*",
+    "@soft-arch/util-enum": "workspace:*",
+    "@soft-arch/util-ts": "workspace:*",
     "drizzle-orm": "^0.44.2",
     "next": "~15.3.3",
     "react": "19.1.0",

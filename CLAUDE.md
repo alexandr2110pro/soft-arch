@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-This is the **space-architects** open-source monorepo. It publishes TypeScript utility packages to npm under the `@space-architects` scope. This is NOT a web application -- there are no servers, APIs, or UI components.
+This is the **soft-arch** open-source monorepo. It publishes TypeScript utility packages to npm under the `@soft-arch` scope. This is NOT a web application -- there are no servers, APIs, or UI components.
 
 ## Coding Guidelines
 
@@ -44,11 +44,11 @@ Nx project names (`<project-name>`) are defined via `"nx": { "name": "..." }` in
 ```
 packages/
   util/
-    ts/        → @space-architects/util-ts       – pure type-level utilities (Simplify, TupleMerge, PropValues, NonEmptyArray)
-    enum/      → @space-architects/util-enum     – runtime enum helpers (enumObject, enumSuite, enumPick, enumMerge, enumPrefixed)
-    drizzle/   → @space-architects/util-drizzle  – Drizzle ORM helpers (lazyDrizzle proxy, uuidV7 custom column types)
+    ts/        → @soft-arch/util-ts       – pure type-level utilities (Simplify, TupleMerge, PropValues, NonEmptyArray)
+    enum/      → @soft-arch/util-enum     – runtime enum helpers (enumObject, enumSuite, enumPick, enumMerge, enumPrefixed)
+    drizzle/   → @soft-arch/util-drizzle  – Drizzle ORM helpers (lazyDrizzle proxy, uuidV7 custom column types)
   nx/plugin/
-    std/       → @space-architects/nx-plugin-std – workspace generators (pkg, cfg, mv, rm)
+    std/       → @soft-arch/nx-plugin-std – workspace generators (pkg, cfg, mv, rm)
 ```
 
 All packages share a **fixed version** (bumped together on every release). Only packages tagged `npm:public` in their `package.json` `nx.tags` are published to npm.
@@ -57,7 +57,7 @@ All packages share a **fixed version** (bumped together on every release). Only 
 
 - **Vite** is the build tool for `util/*` packages (library mode, emits ESM `.js` + CJS `.cjs` + `.d.ts`).
 - **`@nx/js:tsc`** is used for `nx-plugin-std` (needs to preserve asset files like `generators.json`).
-- Every package exposes a `@space-architects/source` custom export condition that points directly to TypeScript source, used during development inside the monorepo (`tsconfig.base.json` sets `customConditions`).
+- Every package exposes a `@soft-arch/source` custom export condition that points directly to TypeScript source, used during development inside the monorepo (`tsconfig.base.json` sets `customConditions`).
 - `test` targets depend on `^build` -- dependency packages must be built before tests run.
 
 ### TypeScript
@@ -72,7 +72,7 @@ All packages share a **fixed version** (bumped together on every release). Only 
 Prettier enforces import order (via `@trivago/prettier-plugin-sort-imports`):
 1. `server-only`
 2. Third-party packages
-3. `@space-architects/*`
+3. `@soft-arch/*`
 4. `../` relative
 5. `./` relative
 

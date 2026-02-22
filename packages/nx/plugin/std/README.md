@@ -1,15 +1,15 @@
-# @space-architects/nx-plugin-std
+# @soft-arch/nx-plugin-std
 
-Space Architects Standard Nx for standard Nx workflows
+SoftArch Standard Nx for standard Nx workflows
 such as creating packages, initializing config files and frameworks,
 building and deploying apps, and so on.
 
 ## Installation
 
 ```bash
-npm install -D @space-architects/nx-plugin-std
+npm install -D @soft-arch/nx-plugin-std
 # or
-pnpm add -D @space-architects/nx-plugin-std
+pnpm add -D @soft-arch/nx-plugin-std
 ```
 
 ## Usage
@@ -19,7 +19,7 @@ Add to your `nx.json` plugins array:
 ```json
 {
   "plugins": [
-    "@space-architects/nx-plugin-std"
+    "@soft-arch/nx-plugin-std"
   ]
 }
 ```
@@ -32,4 +32,4 @@ Add to your `nx.json` plugins array:
 
 ## Contributing
 
-This package is part of the [Space Architects monorepo](../../../README.md).
+This package is part of the [SoftArch monorepo](../../../README.md).

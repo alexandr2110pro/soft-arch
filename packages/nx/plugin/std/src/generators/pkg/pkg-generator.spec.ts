@@ -554,14 +554,14 @@ function rootPackageJsonBase() {
     name: '@ns/source',
     repository: {
       type: 'git',
-      url: 'https://github.com/space-architects/space-architects.git',
+      url: 'https://github.com/alexandr2110pro/soft-arch.git',
       directory: '.',
     },
-    homepage: 'https://github.com/space-architects/space-architects',
+    homepage: 'https://github.com/alexandr2110pro/soft-arch',
     bugs: {
-      url: 'https://github.com/space-architects/space-architects/issues',
+      url: 'https://github.com/alexandr2110pro/soft-arch/issues',
     },
-    author: 'Space Architects',
+    author: 'SoftArch',
     license: 'MIT',
   };
 }

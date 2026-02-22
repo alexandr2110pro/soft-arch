@@ -1,21 +1,21 @@
-# @space-architects/util-enum
+# @soft-arch/util-enum
 
 A comprehensive TypeScript utility library for creating, manipulating, and working with enum-like objects. This package provides type-safe utilities for common enum operations with full TypeScript support.
 
 ## Installation
 
 ```bash
-npm install @space-architects/util-enum
+npm install @soft-arch/util-enum
 # or
-pnpm add @space-architects/util-enum
+pnpm add @soft-arch/util-enum
 # or
-yarn add @space-architects/util-enum
+yarn add @soft-arch/util-enum
 ```
 
 ## Features
 
 - 🔒 **Type-safe**: Full TypeScript support with strict typing
-- 🚀 **Zero dependencies**: Lightweight with minimal footprint (depends only on `@space-architects/util-ts`)
+- 🚀 **Zero dependencies**: Lightweight with minimal footprint (depends only on `@soft-arch/util-ts`)
 - 📦 **Tree-shakable**: Import only what you need
 - 🎯 **Focused**: Specialized utilities for enum-like operations
 - 🧪 **Well-tested**: Comprehensive test coverage
@@ -87,7 +87,7 @@ if (VIEWER_PERMISSIONS.hasValue(maybePermission)) {
 Creates an enum-like object where keys and values are identical.
 
 ```typescript
-import { enumObject, type EnumInferFromObject } from '@space-architects/util-enum';
+import { enumObject, type EnumInferFromObject } from '@soft-arch/util-enum';
 
 const Status = enumObject(['pending', 'approved', 'rejected']);
 // ^? Readonly<{ pending: 'pending', approved: 'approved', rejected: 'rejected' }>
@@ -105,7 +105,7 @@ type StatusType = EnumInferFromObject<typeof Status>
 Merges any number of enum objects into a single enum object.
 
 ```typescript
-import { enumMerge, enumObject } from '@space-architects/util-enum';
+import { enumMerge, enumObject } from '@soft-arch/util-enum';
 
 const Colors = enumObject(['green', 'red']);
 const Sizes = enumObject(['small', 'large']);
@@ -120,7 +120,7 @@ const Combined = enumMerge(Colors, Sizes, Status);
 Creates a new enum object by picking specific keys from an existing enum.
 
 ```typescript
-import { enumPick } from '@space-architects/util-enum';
+import { enumPick } from '@soft-arch/util-enum';
 
 const AllStatus = {
   pending: 'pending',
@@ -140,7 +140,7 @@ const ActiveStatus = enumPick(
 Creates an enum object with prefixed keys and values.
 
 ```typescript
-import { enumPrefixed } from '@space-architects/util-enum';
+import { enumPrefixed } from '@soft-arch/util-enum';
 
 const Actions = enumPrefixed('user', ['create', 'update', 'delete'] as const);
 // Result: { user_create: 'user/create', user_update: 'user/update', user_delete: 'user/delete' }
@@ -151,7 +151,7 @@ const Actions = enumPrefixed('user', ['create', 'update', 'delete'] as const);
 Extracts the values from an enum object as a strongly-typed array.
 
 ```typescript
-import { enumValues, enumObject } from '@space-architects/util-enum';
+import { enumValues, enumObject } from '@soft-arch/util-enum';
 
 const Status = enumObject(['pending', 'approved', 'rejected'] as const);
 const statusValues = enumValues(Status);
@@ -164,7 +164,7 @@ const statusValues = enumValues(Status);
 Creates a complete enum suite with the enum object, values array, and type guard function. `enumSuiteTuple` returns a tuple for destructuring, while `enumSuiteObject` returns an object with named properties.
 
 ```typescript
-import { enumSuiteObject, enumSuiteTuple, enumObject } from '@space-architects/util-enum';
+import { enumSuiteObject, enumSuiteTuple, enumObject } from '@soft-arch/util-enum';
 
 // Using enumSuiteTuple
 const [StatusEnum, STATUS_ENUM_VALUES, isStatusEnum] = enumSuiteTuple(
@@ -194,7 +194,7 @@ console.log(StatusEnumSuite.hasValue('invalid')); // false
 Infers union type from an array of string values.
 
 ```typescript
-import type { EnumInferFromValues } from '@space-architects/util-enum';
+import type { EnumInferFromValues } from '@soft-arch/util-enum';
 
 type Status = EnumInferFromValues<['pending', 'approved', 'rejected']>;
 // Result: 'pending' | 'approved' | 'rejected'
@@ -205,8 +205,8 @@ type Status = EnumInferFromValues<['pending', 'approved', 'rejected']>;
 Infers union type from an enum object's values.
 
 ```typescript
-import type { EnumInferFromObject } from '@space-architects/util-enum';
-import { enumObject } from '@space-architects/util-enum';
+import type { EnumInferFromObject } from '@soft-arch/util-enum';
+import { enumObject } from '@soft-arch/util-enum';
 
 const Status = enumObject(['pending', 'approved', 'rejected'] as const);
 type StatusType = EnumInferFromObject<typeof Status>;
@@ -215,7 +215,7 @@ type StatusType = EnumInferFromObject<typeof Status>;
 
 ## Dependencies
 
-- `@space-architects/util-ts`: Provides utility types like `Simplify` and `PropValues`
+- `@soft-arch/util-ts`: Provides utility types like `Simplify` and `PropValues`
 
 ## License
 
@@ -227,6 +227,6 @@ Contributions are welcome! Please read our contributing guidelines and submit pu
 
 ## Support
 
-- 🐛 [Report bugs](https://github.com/space-architects/space-architects/issues)
-- 💡 [Request features](https://github.com/space-architects/space-architects/issues)
-- 📖 [Documentation](https://github.com/space-architects/space-architects#readme)
+- 🐛 [Report bugs](https://github.com/alexandr2110pro/soft-arch/issues)
+- 💡 [Request features](https://github.com/alexandr2110pro/soft-arch/issues)
+- 📖 [Documentation](https://github.com/alexandr2110pro/soft-arch#readme)

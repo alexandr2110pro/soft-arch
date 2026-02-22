@@ -1,4 +1,4 @@
-# Code Style & Conventions: space-architects
+# Code Style & Conventions: soft-arch
 
 ## TypeScript
 - **Strict mode**: all strict flags enabled
@@ -21,7 +21,7 @@
 - **Import order** (via prettier-plugin-sort-imports):
   1. `server-only` imports
   2. Third-party packages
-  3. `@space-architects/*` packages
+  3. `@soft-arch/*` packages
   4. Relative imports
 
 ## ESLint (flat config)

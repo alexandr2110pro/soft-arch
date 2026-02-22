@@ -53,14 +53,14 @@ jobs:
       - name: Configure Git
         run: |
           git config user.name "Release Bot"
-          git config user.email "release-bot@space-architects.com"
+          git config user.email "release-bot@soft-arch.dev"
 
       - name: Setup npm authentication
         run: |
           # Configure npm for publishing
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_ACCESS_TOKEN }}" > ~/.npmrc
           echo "registry=https://registry.npmjs.org" >> ~/.npmrc
-          echo "@space-architects:registry=https://registry.npmjs.org" >> ~/.npmrc
+          echo "@soft-arch:registry=https://registry.npmjs.org" >> ~/.npmrc
 
       - name: Verify packages are built
         run: pnpm dlx nx run-many -t build --projects=tag:npm:public

@@ -1,4 +1,4 @@
-# Suggested Commands: space-architects
+# Suggested Commands: soft-arch
 
 ## Daily Development
 

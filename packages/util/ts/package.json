@@ -1,7 +1,7 @@
 {
-  "name": "@space-architects/util-ts",
+  "name": "@soft-arch/util-ts",
   "version": "1.6.1",
-  "description": "TypeScript utilities for Space Architects",
+  "description": "TypeScript utilities for SoftArch",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -13,7 +13,7 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "default": "./dist/index.js",
-      "@space-architects/source": "./src/index.ts"
+      "@soft-arch/source": "./src/index.ts"
     }
   },
   "files": [
@@ -22,20 +22,20 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/space-architects/space-architects.git",
+    "url": "https://github.com/alexandr2110pro/soft-arch.git",
     "directory": "packages/util/ts"
   },
-  "homepage": "https://github.com/space-architects/space-architects#readme",
+  "homepage": "https://github.com/alexandr2110pro/soft-arch#readme",
   "bugs": {
-    "url": "https://github.com/space-architects/space-architects/issues"
+    "url": "https://github.com/alexandr2110pro/soft-arch/issues"
   },
   "keywords": [
     "typescript",
     "utilities",
     "types",
-    "space-architects"
+    "soft-arch"
   ],
-  "author": "Space Architects",
+  "author": "SoftArch",
   "license": "MIT",
   "publishConfig": {
     "access": "public"

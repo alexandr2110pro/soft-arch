@@ -1,7 +1,7 @@
-# Project Overview: space-architects
+# Project Overview: soft-arch
 
 ## Purpose
-Open-source TypeScript utility library monorepo publishing packages under `@space-architects/` to npm. MIT licensed.
+Open-source TypeScript utility library monorepo publishing packages under `@soft-arch/` to npm. MIT licensed.
 
 ## Tech Stack
 - TypeScript 5.9.2 (strict, nodenext modules, ESNext target)
@@ -15,7 +15,7 @@ Open-source TypeScript utility library monorepo publishing packages under `@spac
 
 ## Project Structure
 ```
-space-architects/
+soft-arch/
 ├── packages/
 │   ├── util/
 │   │   ├── enum/      - Enum utilities with type inference

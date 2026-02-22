@@ -8,13 +8,13 @@ importers:
 
   .:
     dependencies:
-      '@space-architects/util-drizzle':
+      '@soft-arch/util-drizzle':
         specifier: workspace:*
         version: link:packages/util/drizzle
-      '@space-architects/util-enum':
+      '@soft-arch/util-enum':
         specifier: workspace:*
         version: link:packages/util/enum
-      '@space-architects/util-ts':
+      '@soft-arch/util-ts':
         specifier: workspace:*
         version: link:packages/util/ts
       drizzle-orm:
@@ -186,7 +186,7 @@ importers:
 
   packages/util/enum:
     dependencies:
-      '@space-architects/util-ts':
+      '@soft-arch/util-ts':
         specifier: workspace:*
         version: link:../ts
 

@@ -17,7 +17,7 @@ echo ""
 # Test 1: Default behavior (local registry)
 echo -e "${YELLOW}📋 Test 1: Default Configuration (Local Development)${NC}"
 echo -e "Default registry: $(npm config get registry)"
-echo -e "Scoped registry: $(npm config get @space-architects:registry)"
+echo -e "Scoped registry: $(npm config get @soft-arch:registry)"
 echo ""
 
 # Test 2: Environment variable override 

@@ -1,5 +1,5 @@
 {
-  "name": "@space-architects/util-enum",
+  "name": "@soft-arch/util-enum",
   "version": "1.6.1",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -12,7 +12,7 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js",
-      "@space-architects/source": "./src/index.ts"
+      "@soft-arch/source": "./src/index.ts"
     }
   },
   "files": [
@@ -20,20 +20,20 @@
     "!**/*.tsbuildinfo"
   ],
   "dependencies": {
-    "@space-architects/util-ts": "workspace:*"
+    "@soft-arch/util-ts": "workspace:*"
   },
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/space-architects/space-architects#readme",
+  "homepage": "https://github.com/alexandr2110pro/soft-arch#readme",
   "bugs": {
-    "url": "https://github.com/space-architects/space-architects/issues"
+    "url": "https://github.com/alexandr2110pro/soft-arch/issues"
   },
-  "author": "Space Architects",
+  "author": "SoftArch",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/space-architects/space-architects.git",
+    "url": "https://github.com/alexandr2110pro/soft-arch.git",
     "directory": "packages/util/enum"
   },
   "nx": {

@@ -1,7 +1,7 @@
-# space-architects - Project Memory
+# soft-arch - Project Memory
 
 ## Overview
-Open-source TypeScript utility library monorepo. Publishes packages under `@space-architects/` namespace to npm.
+Open-source TypeScript utility library monorepo. Publishes packages under `@soft-arch/` namespace to npm.
 
 ## Quick Reference
 - **Package manager**: pnpm (workspace protocol)

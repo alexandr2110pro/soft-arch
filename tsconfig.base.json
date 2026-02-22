@@ -18,6 +18,6 @@
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
     "target": "ESNext",
-    "customConditions": ["@space-architects/source"]
+    "customConditions": ["@soft-arch/source"]
   }
 }

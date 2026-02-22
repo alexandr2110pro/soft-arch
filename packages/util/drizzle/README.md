@@ -1,13 +1,13 @@
-# @space-architects/util-drizzle
+# @soft-arch/util-drizzle
 
 Utility functions for Drizzle ORM.
 
 ## Installation
 
 ```bash
-npm install @space-architects/util-drizzle
+npm install @soft-arch/util-drizzle
 # or
-pnpm add @space-architects/util-drizzle
+pnpm add @soft-arch/util-drizzle
 ```
 
 ## Features
@@ -25,7 +25,7 @@ Create a lazily initialized Drizzle instance. Useful for serverless environments
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 
-import { lazyDrizzle } from '@space-architects/util-drizzle';
+import { lazyDrizzle } from '@soft-arch/util-drizzle';
 
 const db = lazyDrizzle(
   (url) => drizzle(postgres(url)),
@@ -45,7 +45,7 @@ Drizzle column types for UUIDv7 with automatic generation.
 
 ```typescript
 import { pgTable } from 'drizzle-orm/pg-core';
-import { uuidV7, uuidV7Nullable } from '@space-architects/util-drizzle';
+import { uuidV7, uuidV7Nullable } from '@soft-arch/util-drizzle';
 
 const users = pgTable('users', {
   id: uuidV7('id').primaryKey(),
@@ -58,4 +58,4 @@ const users = pgTable('users', {
 
 ## Contributing
 
-This package is part of the [Space Architects monorepo](../../README.md).
+This package is part of the [SoftArch monorepo](../../README.md).
