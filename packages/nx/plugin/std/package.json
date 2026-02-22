@@ -8,10 +8,10 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
+      "@soft-arch/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "default": "./dist/index.js",
-      "@soft-arch/source": "./src/index.ts"
+      "default": "./dist/index.js"
     }
   },
   "files": [
@@ -73,16 +73,16 @@
     }
   },
   "dependencies": {
-    "@nx/devkit": "21.5.3",
-    "zod": "^3.25.61"
+    "@nx/devkit": "22.5.2",
+    "zod": "^4.3.6"
   },
   "peerDependencies": {
+    "@nx/devkit": ">=21.1.3 <23.0.0",
+    "@nx/eslint": ">=21.1.3 <23.0.0",
+    "@nx/js": ">=21.1.3 <23.0.0",
+    "nx": ">=21.1.3 <23.0.0",
     "tslib": ">=2.3.0",
-    "vitest": ">=3.2.3",
-    "nx": ">=21.1.3 <22.0.0",
-    "@nx/devkit": ">=21.1.3 <22.0.0",
-    "@nx/eslint": ">=21.1.3 <22.0.0",
-    "@nx/js": ">=21.1.3 <22.0.0"
+    "vitest": ">=4.0.0"
   },
   "generators": "./generators.json"
 }

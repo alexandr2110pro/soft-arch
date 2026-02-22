@@ -86,12 +86,16 @@ export async function tsReferenceBased(
           });
         }
 
-        const { development, ...rest } = exportsParse.data['.'];
+        const {
+          development,
+          default: _default,
+          ...rest
+        } = exportsParse.data['.'];
 
         json.exports['.'] = {
-          require: './dist/index.cjs',
-          ...rest,
           development,
+          ...rest,
+          require: './dist/index.cjs',
         };
 
         return json;

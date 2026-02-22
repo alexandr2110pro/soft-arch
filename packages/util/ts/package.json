@@ -9,11 +9,10 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
+      "@soft-arch/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.js",
-      "@soft-arch/source": "./src/index.ts"
+      "require": "./dist/index.cjs"
     }
   },
   "files": [

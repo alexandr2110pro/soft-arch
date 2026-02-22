@@ -8,7 +8,7 @@ Open-source TypeScript utility library monorepo publishing packages under `@soft
 - Nx 21.5.3 with plugins: @nx/js, @nx/vite, @nx/next, @nx/eslint, @nx/web
 - Vite 7.1.6 + vite-plugin-dts for library builds
 - SWC 1.12.1 for fast compilation
-- Vitest 3.2.3 (edge-runtime environment, global test API)
+- Vitest 4.0.9 (edge-runtime environment, global test API)
 - ESLint 9.29.0 (flat config) + Prettier 3.5.3
 - pnpm workspace manager
 - Drizzle ORM 0.44.2, Zod 3.25.64, React 19.1.0, Next.js 15.3.3, UUID 11.1.0
