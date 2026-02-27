@@ -15,20 +15,23 @@ describe('cfg generator', () => {
     tree = createWorkspace();
 
     // Mock fetch for npm registry calls
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: true,
-      json: vi.fn().mockResolvedValue({
-        'dist-tags': {
-          latest: '1.1.0',
-          canary: '1.1.0-canary.1',
-        },
-        versions: {
-          '1.0.0': {},
-          '0.9.0': {},
-          '1.1.0-canary.1': {},
-        },
-      }),
-    } as any));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: vi.fn().mockResolvedValue({
+          'dist-tags': {
+            latest: '1.1.0',
+            canary: '1.1.0-canary.1',
+          },
+          versions: {
+            '1.0.0': {},
+            '0.9.0': {},
+            '1.1.0-canary.1': {},
+          },
+        }),
+      } as any),
+    );
   });
 
   afterEach(() => {
