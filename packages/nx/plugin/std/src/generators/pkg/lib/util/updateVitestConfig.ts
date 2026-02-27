@@ -1,12 +1,9 @@
-import { Tree, addDependenciesToPackageJson } from '@nx/devkit';
-import type { ViteUserConfig } from 'vitest/config' with {
-  'resolution-mode': 'import',
-};
+import { type Tree } from '@nx/devkit';
+import type { ViteUserConfig } from 'vitest/config';
 
-import { versionResolve } from '../../../cfg/lib/versionResolve';
-import type { PkgGeneratorSchema } from '../../schema';
+import type { PkgGeneratorSchema } from '../../schema.d.ts';
 
-import { resolveViteConfigPath } from './resolveViteConfigPath.js';
+import { resolveViteConfigPath } from './resolveViteConfigPath.ts';
 
 export async function updateVitestConfig(
   tree: Tree,
@@ -17,28 +14,24 @@ export async function updateVitestConfig(
 
   if (!viteConfigPath) return;
 
-  const viteConfigContent = tree.read(viteConfigPath, 'utf-8');
+  let viteConfigContent = tree.read(viteConfigPath, 'utf-8');
   if (!viteConfigContent) return;
 
   // Check if the file already has passWithNoTests configured
-  if (viteConfigContent.includes('passWithNoTests:')) return;
-
-  // Find the test configuration block and add passWithNoTests
-  const updatedContent = viteConfigContent
-    .replace(/(\s+test:\s*\{)(\s*)/, '$1\n    passWithNoTests: true,$2')
-    .replace(
-      /(\s+environment:\s*['"])([^'"]*)(['"])/,
-      `$1${intoVitestEnv(env)}$3`,
+  if (!viteConfigContent.includes('passWithNoTests:')) {
+    viteConfigContent = viteConfigContent.replace(
+      /(\s+test:\s*\{)(\s*)/,
+      '$1\n    passWithNoTests: true,$2',
     );
+  }
 
-  tree.write(viteConfigPath, updatedContent);
+  // Replace the environment value
+  viteConfigContent = viteConfigContent.replace(
+    /(\s+environment:\s*['"])([^'"]*)(['"])/,
+    `$1${intoVitestEnv(env)}$3`,
+  );
 
-  const devDependencies = await versionResolve({
-    '@edge-runtime/types': 'latest',
-    '@edge-runtime/vm': 'latest',
-  });
-
-  addDependenciesToPackageJson(tree, {}, devDependencies, 'package.json');
+  tree.write(viteConfigPath, viteConfigContent);
 }
 
 function intoVitestEnv(

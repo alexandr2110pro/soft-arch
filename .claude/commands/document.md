@@ -62,7 +62,7 @@ Compose the final documentation following these principles:
 - Lead with the "what" and "why" before the "how".
 - **Document purpose, contracts, and usage examples -- not implementation logic.** Developers can read the code for logic; docs should capture the things that aren't obvious from the code itself.
 - Show type inference behavior in examples where it aids understanding.
-- Use bold for key terms on first use. Use inline code for identifiers (`functionName`, `@soft-arch/package-name`).
+- Use bold for key terms on first use. Use inline code for identifiers (`functionName`, `@space-arch/package-name`).
 - Prefer bullet lists over prose for enumerations.
 - Keep sections short. If a section exceeds ~40 lines, consider splitting it.
 
@@ -83,7 +83,7 @@ Go through the written documentation point by point:
 
 1. **Fact-check every claim** -- Re-read the relevant source code to confirm. Function names, parameter types, return types, file paths, package names -- all must be exact.
 2. **Verify code snippets** -- Every usage example must reflect actual call patterns found in the codebase (tests are the best source). Do not invent examples -- extract from real call sites and simplify only if necessary.
-3. **Check file paths and package names** -- Every `@soft-arch/...` alias, every `packages/...` path must exist.
+3. **Check file paths and package names** -- Every `@space-arch/...` alias, every `packages/...` path must exist.
 4. **Check cross-references** -- Every link to another doc or section must be valid.
 5. **Remove anything unverified** -- If you cannot confirm a fact from source, delete it.
 

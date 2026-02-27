@@ -1,4 +1,6 @@
-import { versionMatchLatest } from './versionMatch';
+import { logger } from '@nx/devkit';
+
+import { versionMatchLatest } from './versionMatch.ts';
 
 type VersionConstraintSegment = `${number | '*'}`;
 export type VersionConstraint =
@@ -46,7 +48,7 @@ async function packageFetch(packageName: string): Promise<NpmPackageData> {
   return response.json() as Promise<NpmPackageData>;
 }
 
-function constrantApply(
+function constraintApply(
   constraint: string,
   packageData: NpmPackageData,
 ): string {
@@ -74,10 +76,10 @@ async function resolveOne(
 
   try {
     const packageData = await packageFetch(packageName);
-    const resolvedVersion = constrantApply(constraint, packageData);
+    const resolvedVersion = constraintApply(constraint, packageData);
     return [packageName, resolvedVersion];
   } catch (error) {
-    console.warn(
+    logger.warn(
       `Failed to fetch version for ${packageName}: ${(error as Error).message}, using fallback`,
     );
     return [packageName, constraint];

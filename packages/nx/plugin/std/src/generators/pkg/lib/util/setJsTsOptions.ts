@@ -1,23 +1,20 @@
 import type { Tree } from '@nx/devkit';
 
-import { updateArrayProperty } from './updateArrayProperty';
-import { updateTsConfigLibJson } from './updateTsConfigLibJson';
-import { updateTsConfigSpecJson } from './updateTsConfigSpecJson';
+import { updateArrayProperty } from './updateArrayProperty.ts';
+import { updateTsConfigLibJson } from './updateTsConfigLibJson.ts';
+import { updateTsConfigSpecJson } from './updateTsConfigSpecJson.ts';
 
-export function setJsTsOptions(tree: Tree, path: string, buildable: boolean) {
+export function setJsTsOptions(tree: Tree, path: string) {
   updateTsConfigSpecJson(tree, path, json => {
-    json.compilerOptions.module = 'esnext';
-    json.compilerOptions.moduleResolution = 'bundler';
+    json.compilerOptions.module = 'nodenext';
+    json.compilerOptions.moduleResolution = 'nodenext';
     return json;
   });
 
   updateTsConfigLibJson(tree, path, json => {
-    json.compilerOptions.module = 'esnext';
-    json.compilerOptions.moduleResolution = 'bundler';
-    updateArrayProperty(json.compilerOptions, 'types', [
-      'node',
-      ...(buildable ? ['vite/client'] : []),
-    ]);
+    json.compilerOptions.module = 'nodenext';
+    json.compilerOptions.moduleResolution = 'nodenext';
+    updateArrayProperty(json.compilerOptions, 'types', ['node', 'vite/client']);
     return json;
   });
 }

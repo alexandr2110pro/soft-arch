@@ -1,4 +1,4 @@
-import type { TupleMerge } from '@soft-arch/util-ts';
+import type { TupleMerge } from '@space-arch/util-ts';
 
 export type EnumMerge<T extends Readonly<Record<string, string>[]>> = Readonly<
   TupleMerge<T>

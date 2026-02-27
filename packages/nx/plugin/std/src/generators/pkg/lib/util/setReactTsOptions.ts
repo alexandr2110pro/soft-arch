@@ -1,8 +1,8 @@
-import { Tree, joinPathFragments } from '@nx/devkit';
+import { type Tree, joinPathFragments } from '@nx/devkit';
 
-import { updateArrayProperty } from './updateArrayProperty';
-import { updateTsConfigLibJson } from './updateTsConfigLibJson';
-import { updateTsConfigSpecJson } from './updateTsConfigSpecJson';
+import { updateArrayProperty } from './updateArrayProperty.ts';
+import { updateTsConfigLibJson } from './updateTsConfigLibJson.ts';
+import { updateTsConfigSpecJson } from './updateTsConfigSpecJson.ts';
 
 const BABELRC = `
 {
@@ -19,17 +19,14 @@ const BABELRC = `
 }
 `.trim();
 
-export function setReactTsOptions(
-  tree: Tree,
-  path: string,
-  buildable: boolean,
-) {
+export function setReactTsOptions(tree: Tree, path: string) {
   tree.write(joinPathFragments(path, '.babelrc'), BABELRC);
 
   updateTsConfigSpecJson(tree, path, json => {
     json.compilerOptions.jsx = 'react-jsx';
     json.compilerOptions.module = 'esnext';
     json.compilerOptions.moduleResolution = 'bundler';
+    return json;
   });
 
   updateTsConfigLibJson(tree, path, json => {
@@ -41,7 +38,7 @@ export function setReactTsOptions(
       'node',
       '@nx/react/typings/cssmodule.d.ts',
       '@nx/react/typings/image.d.ts',
-      ...(buildable ? ['vite/client'] : []),
+      'vite/client',
     ]);
 
     updateArrayProperty(json, 'include', [
@@ -66,14 +63,6 @@ export function setReactTsOptions(
       'vite.config.mts',
       'vitest.config.ts',
       'vitest.config.mts',
-      'src/**/*.test.ts',
-      'src/**/*.spec.ts',
-      'src/**/*.test.tsx',
-      'src/**/*.spec.tsx',
-      'src/**/*.test.js',
-      'src/**/*.spec.js',
-      'src/**/*.test.jsx',
-      'src/**/*.spec.jsx',
       'eslint.config.js',
       'eslint.config.cjs',
       'eslint.config.mjs',

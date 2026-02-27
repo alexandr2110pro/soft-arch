@@ -1,6 +1,6 @@
-import { Tree } from '@nx/devkit';
+import type { Tree } from '@nx/devkit';
 
-import { resolveViteConfigPath } from './resolveViteConfigPath.js';
+import { resolveViteConfigPath } from './resolveViteConfigPath.ts';
 
 /**
  * Updates the vite config file to include both ES and CJS formats

@@ -77,4 +77,4 @@ nx release publish --registry=http://localhost:4873
 - **Local development**: `http://localhost:4873` (Verdaccio, managed by Nx)
 - **CI/Production**: `https://registry.npmjs.org` (npm registry)
 
-The `.npmrc` in the repo points `@soft-arch` to localhost for local Verdaccio testing. The CI workflow overrides this by writing `~/.npmrc` with the npm registry auth.
+The `.npmrc` in the repo points `@space-arch` to localhost for local Verdaccio testing. The CI workflow overrides this by writing `~/.npmrc` with the npm registry auth.

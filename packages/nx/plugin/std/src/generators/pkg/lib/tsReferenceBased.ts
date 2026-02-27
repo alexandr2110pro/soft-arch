@@ -1,37 +1,23 @@
 import { type Tree, joinPathFragments, updateJson } from '@nx/devkit';
 import type { LinterType } from '@nx/eslint';
 import { libraryGenerator } from '@nx/js';
-import type { LibraryGeneratorSchema } from '@nx/js/src/generators/library/schema';
-import type { PackageJson } from 'nx/src/utils/package-json';
-import { z } from 'zod/v4-mini';
+import type { LibraryGeneratorSchema } from '@nx/js/src/generators/library/schema.js';
+import type { PackageJson } from 'nx/src/utils/package-json.js';
 
-import type { PkgGeneratorSchema } from '../schema';
+import type { PkgGeneratorSchema } from '../schema.d.ts';
 
-import { addScopedLocalPackage } from './util/addLocalPackage';
-import { addPublishInfoToPackageJson } from './util/addPublishInfoToPackageJson';
-import { setJsTsOptions } from './util/setJsTsOptions';
-import { setNextTsOptions } from './util/setNextTsOption';
-import { setReactTsOptions } from './util/setRactTsOptions';
-import { updateViteBuildFormats } from './util/updateViteBuildFormats';
-import { updateVitestConfig } from './util/updateVitestConfig';
-
-const generatedExportsSchema = z.object({
-  '.': z.object({
-    types: z.string(),
-    import: z.string(),
-    development: z.string(),
-    default: z.string(),
-  }),
-});
+import { addScopedLocalPackage } from './util/addLocalPackage.ts';
+import { addPublishInfoToPackageJson } from './util/addPublishInfoToPackageJson.ts';
+import { setJsTsOptions } from './util/setJsTsOptions.ts';
+import { setNextTsOptions } from './util/setNextTsOptions.ts';
+import { setReactTsOptions } from './util/setReactTsOptions.ts';
+import { updateViteBuildFormats } from './util/updateViteBuildFormats.ts';
+import { updateVitestConfig } from './util/updateVitestConfig.ts';
 
 export async function tsReferenceBased(
   tree: Tree,
   name: string,
-  path: string,
-  publishable: boolean,
-  buildable: boolean,
-  env: PkgGeneratorSchema['env'],
-  preset: PkgGeneratorSchema['preset'],
+  { path, publishable, buildable, env, preset }: PkgGeneratorSchema,
 ) {
   if (publishable && !buildable) {
     throw new Error('Publishable packages must be buildable');
@@ -54,15 +40,15 @@ export async function tsReferenceBased(
   await updateVitestConfig(tree, path, env);
 
   if (preset === 'js') {
-    setJsTsOptions(tree, path, buildable);
+    setJsTsOptions(tree, path);
   }
 
   if (preset === 'react') {
-    setReactTsOptions(tree, path, buildable);
+    setReactTsOptions(tree, path);
   }
 
   if (preset === 'nextjs') {
-    setNextTsOptions(tree, path, buildable);
+    setNextTsOptions(tree, path);
   }
 
   if (publishable) {
@@ -74,26 +60,27 @@ export async function tsReferenceBased(
       tree,
       joinPathFragments(path, 'package.json'),
       json => {
-        if (typeof json.exports !== 'object' || json.exports === null) {
-          throw new Error('exports is not an object in package.json');
+        const dotExport = (
+          json.exports as Record<string, Record<string, string>>
+        )?.['.'];
+        if (typeof dotExport !== 'object' || dotExport === null) {
+          throw new Error(
+            '"." export is not an object in generated package.json',
+          );
         }
 
-        const exportsParse = z.safeParse(generatedExportsSchema, json.exports);
-        if (!exportsParse.success) {
-          throw new Error('"exports" is invalid in generated package.json', {
-            cause: exportsParse.error,
-          });
+        if (!dotExport['types'] || !dotExport['import']) {
+          throw new Error(
+            '"exports" is missing required "types" or "import" fields',
+          );
         }
 
-        const {
-          development,
-          default: _default,
-          ...rest
-        } = exportsParse.data['.'];
+        // Remove `default` (if present) and add `require` for CJS.
+        // Keep the custom condition (e.g. @space-arch/source) first for correct resolution order.
+        const { default: _default, ...kept } = dotExport;
 
-        json.exports['.'] = {
-          development,
-          ...rest,
+        (json.exports as Record<string, unknown>)['.'] = {
+          ...kept,
           require: './dist/index.cjs',
         };
 

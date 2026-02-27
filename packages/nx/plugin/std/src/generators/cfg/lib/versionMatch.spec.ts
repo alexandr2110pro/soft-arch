@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { compareVersions, versionMatchLatest } from './versionMatch';
+import { compareVersions, versionMatchLatest } from './versionMatch.js';
 
 describe('compareVersions', () => {
   it('should compare versions correctly', () => {

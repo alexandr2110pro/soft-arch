@@ -5,9 +5,12 @@
     "emitDeclarationOnly": true,
     "importHelpers": true,
     "isolatedModules": true,
-    "lib": ["ESNext"],
+    "lib": ["es2024"],
+    "allowJs": true,
+    "resolveJsonModule": true,
     "module": "nodenext",
     "moduleResolution": "nodenext",
+    "moduleDetection": "force",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
@@ -17,7 +20,8 @@
     "strict": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
-    "target": "ESNext",
-    "customConditions": ["@soft-arch/source"]
+    "target": "es2024",
+    "verbatimModuleSyntax": true,
+    "customConditions": ["@space-arch/source"]
   }
 }

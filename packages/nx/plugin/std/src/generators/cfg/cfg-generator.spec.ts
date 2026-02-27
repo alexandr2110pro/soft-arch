@@ -1,9 +1,9 @@
-import { Tree, readJson, updateJson } from '@nx/devkit';
-import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { type Tree, readJson, updateJson } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing.js';
 import { vi } from 'vitest';
 
-import cfgGenerator from './cfg-generator';
-import type { CfgGeneratorSchema } from './schema';
+import cfgGenerator from './cfg-generator.js';
+import type { CfgGeneratorSchema } from './schema.d.ts';
 
 describe('cfg generator', () => {
   let tree: Tree;
@@ -15,23 +15,27 @@ describe('cfg generator', () => {
     tree = createWorkspace();
 
     // Mock fetch for npm registry calls
-    global.fetch = vi.fn().mockResolvedValue({
-      ok: true,
-      json: vi.fn().mockResolvedValue({
-        'dist-tags': {
-          latest: '1.1.0',
-          canary: '1.1.0-canary.1',
-        },
-        versions: {
-          '1.0.0': {},
-          '0.9.0': {},
-          '1.1.0-canary.1': {},
-        },
-      }),
-    } as any);
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: vi.fn().mockResolvedValue({
+          'dist-tags': {
+            latest: '1.1.0',
+            canary: '1.1.0-canary.1',
+          },
+          versions: {
+            '1.0.0': {},
+            '0.9.0': {},
+            '1.1.0-canary.1': {},
+          },
+        }),
+      } as any),
+    );
   });
 
   afterEach(() => {
+    vi.unstubAllGlobals();
     vi.restoreAllMocks();
   });
 

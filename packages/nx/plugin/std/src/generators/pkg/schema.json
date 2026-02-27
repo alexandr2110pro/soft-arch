@@ -47,7 +47,7 @@
     "preset": {
       "type": "string",
       "description": "The preset this package will use",
-      "default": "node",
+      "default": "js",
       "enum": ["nextjs", "react", "js"],
       "x-prompt": "Select the preset this package will use"
     },
@@ -62,5 +62,5 @@
       }
     }
   },
-  "required": ["kind", "path", "publishable", "env"]
+  "required": ["kind", "path", "publishable", "buildable", "env"]
 }

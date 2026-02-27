@@ -1,37 +1,17 @@
 import {
-  Tree,
+  type Tree,
   readJson,
   readProjectConfiguration,
   updateJson,
   writeJson,
 } from '@nx/devkit';
-import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing.js';
+import { vi } from 'vitest';
 
 import { resolveViteConfigPath } from './lib/util/resolveViteConfigPath.js';
 import { pkgGenerator } from './pkg-generator.js';
-import type { PkgGeneratorSchema } from './schema.js';
+import type { PkgGeneratorSchema } from './schema.d.ts';
 
-beforeEach(() => {
-  // Mock fetch for npm registry calls
-  global.fetch = vi.fn().mockResolvedValue({
-    ok: true,
-    json: vi.fn().mockResolvedValue({
-      'dist-tags': {
-        latest: '1.1.0',
-        canary: '1.1.0-canary.1',
-      },
-      versions: {
-        '1.0.0': {},
-        '0.9.0': {},
-        '1.1.0-canary.1': {},
-      },
-    }),
-  } as any);
-});
-
-afterEach(() => {
-  vi.restoreAllMocks();
-});
 describe('ts-reference-based publishable package', () => {
   let tree: Tree;
 
@@ -43,88 +23,98 @@ describe('ts-reference-based publishable package', () => {
     env: 'node',
   };
 
-  beforeEach(() => {
+  beforeAll(async () => {
+    // Mock fetch for npm registry calls
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: vi.fn().mockResolvedValue({
+          'dist-tags': {
+            latest: '1.1.0',
+            canary: '1.1.0-canary.1',
+          },
+          versions: {
+            '1.0.0': {},
+            '0.9.0': {},
+            '1.1.0-canary.1': {},
+          },
+        }),
+      } as any),
+    );
+
     tree = createEmptyReferenceBasedWorkspace();
+    await pkgGenerator(tree, options);
   });
 
-  it('should run successfully', async () => {
-    await pkgGenerator(tree, options);
+  afterAll(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
+  it('should run successfully', () => {
     expect(readProjectConfiguration(tree, 'foo-bar-baz')).toBeDefined();
   });
 
-  it('should create references to the package in the tsconfig.json', async () => {
-    await pkgGenerator(tree, options);
-
+  it('should create references to the package in the tsconfig.json', () => {
     expect(readJson(tree, 'tsconfig.json').references).toEqual([
       { path: './packages/foo/bar-baz' },
     ]);
   });
 
-  it('should not create paths reference in the tsconfig.base.json', async () => {
-    await pkgGenerator(tree, options);
+  it('should not create paths reference in the tsconfig.base.json', () => {
     expect(
       readJson(tree, 'tsconfig.base.json').compilerOptions.paths,
     ).toBeUndefined();
   });
 
-  it('should add the new package to dependencies in the package.json', async () => {
-    await pkgGenerator(tree, options);
+  it('should add the new package to dependencies in the package.json', () => {
     expect(readJson(tree, 'package.json').dependencies).toEqual({
       '@ns/foo-bar-baz': 'workspace:*',
     });
   });
-  it('should generate expected package.json', async () => {
-    await pkgGenerator(tree, options);
+
+  it('should generate expected package.json', () => {
     const packageJson = tree
       .read('packages/foo/bar-baz/package.json')
       ?.toString();
     expect(packageJson).toMatchSnapshot();
   });
 
-  it('should not create project.json', async () => {
-    await pkgGenerator(tree, options);
+  it('should not create project.json', () => {
     expect(tree.exists('packages/foo/bar-baz/project.json')).toBe(false);
   });
 
-  it('should generate expected vite.config.ts', async () => {
-    await pkgGenerator(tree, options);
+  it('should generate expected vite.config.ts', () => {
     expect(readViteConfig(tree, 'packages/foo/bar-baz')).toMatchSnapshot();
   });
 
-  it('should configure vite to build both esm and cjs', async () => {
-    await pkgGenerator(tree, options);
+  it('should configure vite to build both esm and cjs', () => {
     expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
       `formats: ['es' as const, 'cjs' as const],`,
     );
   });
 
-  it('should configure vitest to pass with no tests', async () => {
-    await pkgGenerator(tree, options);
+  it('should configure vitest to pass with no tests', () => {
     expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
       `passWithNoTests: true,`,
     );
   });
 
   it('should configure configure jsdom environment, if env is jsdom', async () => {
-    await pkgGenerator(tree, { ...options, env: 'jsdom' });
-    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+    const jsdomTree = createEmptyReferenceBasedWorkspace();
+    await pkgGenerator(jsdomTree, { ...options, env: 'jsdom' });
+    expect(readViteConfig(jsdomTree, 'packages/foo/bar-baz')).toContain(
       `environment: 'jsdom',`,
     );
   });
 
   it('should configure configure edge environment, if env is edge', async () => {
-    await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+    const edgeTree = createEmptyReferenceBasedWorkspace();
+    await pkgGenerator(edgeTree, { ...options, env: 'edge' });
+    expect(readViteConfig(edgeTree, 'packages/foo/bar-baz')).toContain(
       `environment: 'edge-runtime',`,
     );
-  });
-
-  it('should add @edge-runtime/vm and @edge-runtime/types to the package.json if env is edge', async () => {
-    await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(readJson(tree, 'package.json').devDependencies).toMatchObject({
-      '@edge-runtime/vm': '1.1.0',
-      '@edge-runtime/types': '1.1.0',
-    });
   });
 });
 
@@ -135,6 +125,7 @@ describe('ts-reference-based not publishable package', () => {
     path: 'packages/foo/bar-baz',
     kind: 'ts-reference-based',
     publishable: false,
+    buildable: false,
     env: 'node',
   };
 
@@ -282,14 +273,6 @@ describe('ts-reference-based not publishable package', () => {
     expect(packageJson.author).toBeUndefined();
     expect(packageJson.license).toBeUndefined();
   });
-
-  it('should add @edge-runtime/types and @edge-runtime/vm to the package.json if env is edge', async () => {
-    await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(readJson(tree, 'package.json').devDependencies).toMatchObject({
-      '@edge-runtime/types': '1.1.0',
-      '@edge-runtime/vm': '1.1.0',
-    });
-  });
 });
 
 describe('ts-path-based publishable package', () => {
@@ -299,28 +282,51 @@ describe('ts-path-based publishable package', () => {
     path: 'packages/foo/bar-baz',
     kind: 'ts-paths-based',
     publishable: true,
+    buildable: true,
     env: 'node',
   };
 
-  beforeEach(() => {
+  beforeAll(async () => {
+    // Mock fetch for npm registry calls
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: vi.fn().mockResolvedValue({
+          'dist-tags': {
+            latest: '1.1.0',
+            canary: '1.1.0-canary.1',
+          },
+          versions: {
+            '1.0.0': {},
+            '0.9.0': {},
+            '1.1.0-canary.1': {},
+          },
+        }),
+      } as any),
+    );
+
     tree = createEmptyPathBasedWorkspace();
+    await pkgGenerator(tree, options);
   });
 
-  it('should run successfully', async () => {
-    await pkgGenerator(tree, options);
+  afterAll(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
+  it('should run successfully', () => {
     expect(readProjectConfiguration(tree, 'foo-bar-baz')).toBeDefined();
     expect(tree.exists('tsconfig.base.json')).toBe(true);
   });
 
-  it('should update paths in tsconfig.base.json', async () => {
-    await pkgGenerator(tree, options);
+  it('should update paths in tsconfig.base.json', () => {
     expect(readJson(tree, 'tsconfig.base.json').compilerOptions.paths).toEqual({
       '@ns/foo-bar-baz': ['packages/foo/bar-baz/src/index.ts'],
     });
   });
 
-  it('should create expected package.json', async () => {
-    await pkgGenerator(tree, options);
+  it('should create expected package.json', () => {
     expect(readJson(tree, 'packages/foo/bar-baz/package.json')).toEqual({
       ...rootPackageJsonBase(),
       repository: {
@@ -340,55 +346,44 @@ describe('ts-path-based publishable package', () => {
     });
   });
 
-  it('should not create project.json', async () => {
-    await pkgGenerator(tree, options);
+  it('should not create project.json', () => {
     expect(tree.exists('packages/foo/bar-baz/project.json')).toBe(false);
   });
 
-  it('should generate expected vite.config.ts', async () => {
-    await pkgGenerator(tree, options);
+  it('should generate expected vite.config.ts', () => {
     expect(readViteConfig(tree, 'packages/foo/bar-baz')).toMatchSnapshot();
   });
 
-  it('should configure vite to build both esm and cjs, if publishable', async () => {
-    await pkgGenerator(tree, options);
+  it('should configure vite to build both esm and cjs, if publishable', () => {
     expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
       `formats: ['es' as const, 'cjs' as const],`,
     );
   });
 
-  it('should configure vitest to pass with no tests', async () => {
-    await pkgGenerator(tree, options);
+  it('should configure vitest to pass with no tests', () => {
     expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
       `passWithNoTests: true,`,
     );
   });
 
-  it('should not add the package to the root package.json', async () => {
-    await pkgGenerator(tree, options);
+  it('should not add the package to the root package.json', () => {
     expect(readJson(tree, 'package.json').dependencies).toEqual({});
   });
 
   it('should configure configure jsdom environment if env is jsdom', async () => {
-    await pkgGenerator(tree, { ...options, env: 'jsdom' });
-    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+    const jsdomTree = createEmptyPathBasedWorkspace();
+    await pkgGenerator(jsdomTree, { ...options, env: 'jsdom' });
+    expect(readViteConfig(jsdomTree, 'packages/foo/bar-baz')).toContain(
       `environment: 'jsdom',`,
     );
   });
 
   it('should configure configure edge environment if env is edge', async () => {
-    await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
+    const edgeTree = createEmptyPathBasedWorkspace();
+    await pkgGenerator(edgeTree, { ...options, env: 'edge' });
+    expect(readViteConfig(edgeTree, 'packages/foo/bar-baz')).toContain(
       `environment: 'edge-runtime',`,
     );
-  });
-
-  it('should add @edge-runtime/types and @edge-runtime/vm to the package.json if env is edge', async () => {
-    await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(readJson(tree, 'package.json').devDependencies).toMatchObject({
-      '@edge-runtime/vm': '1.1.0',
-      '@edge-runtime/types': '1.1.0',
-    });
   });
 });
 
@@ -399,6 +394,7 @@ describe('ts-path-based non-publishable package', () => {
     path: 'packages/foo/bar-baz',
     kind: 'ts-paths-based',
     publishable: false,
+    buildable: false,
     env: 'node',
   };
 
@@ -431,7 +427,7 @@ describe('ts-path-based non-publishable package', () => {
     const projectConfig = readProjectConfiguration(tree, 'foo-bar-baz');
     expect(projectConfig.targets?.test).toBeDefined();
     expect(projectConfig.targets?.lint).toBeDefined();
-    expect(projectConfig.targets?.build).toBeDefined(); // No build target for non-publishable
+    expect(projectConfig.targets?.build).not.toBeDefined(); // No build target for non-publishable
   });
 
   it('should generate expected vite.config.ts with test configuration only', async () => {
@@ -471,14 +467,6 @@ describe('ts-path-based non-publishable package', () => {
     expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
       `environment: 'edge-runtime',`,
     );
-  });
-
-  it('should add @edge-runtime/types and @edge-runtime/vm to the package.json if env is edge', async () => {
-    await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(readJson(tree, 'package.json').devDependencies).toMatchObject({
-      '@edge-runtime/vm': '1.1.0',
-      '@edge-runtime/types': '1.1.0',
-    });
   });
 
   it('should generate expected vite.config.ts', async () => {
@@ -549,14 +537,14 @@ function rootPackageJsonBase() {
     name: '@ns/source',
     repository: {
       type: 'git',
-      url: 'https://github.com/alexandr2110pro/soft-arch.git',
+      url: 'https://github.com/author/repo.git',
       directory: '.',
     },
-    homepage: 'https://github.com/alexandr2110pro/soft-arch',
+    homepage: 'https://github.com/author/repo',
     bugs: {
-      url: 'https://github.com/alexandr2110pro/soft-arch/issues',
+      url: 'https://github.com/author/repo/issues',
     },
-    author: 'SoftArch',
+    author: 'Author',
     license: 'MIT',
   };
 }

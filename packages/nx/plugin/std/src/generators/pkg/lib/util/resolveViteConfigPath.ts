@@ -1,4 +1,4 @@
-import { Tree, joinPathFragments } from '@nx/devkit';
+import { type Tree, joinPathFragments } from '@nx/devkit';
 
 /**
  * Resolves the vite config file path, checking for `.mts` first then `.ts`.
