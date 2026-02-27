@@ -7,6 +7,8 @@ launch-templates:
         uses: 'nrwl/nx-cloud-workflows/v5/workflow-steps/checkout/main.yaml'
       - name: Install Node
         uses: 'nrwl/nx-cloud-workflows/v5/workflow-steps/install-node/main.yaml'
+        inputs:
+          node_version: '24'
       - name: Restore Node Modules Cache
         uses: 'nrwl/nx-cloud-workflows/v5/workflow-steps/cache/main.yaml'
         inputs:
