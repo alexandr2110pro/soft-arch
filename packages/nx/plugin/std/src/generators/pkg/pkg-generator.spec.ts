@@ -6,6 +6,7 @@ import {
   writeJson,
 } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing.js';
+import { vi } from 'vitest';
 
 import { resolveViteConfigPath } from './lib/util/resolveViteConfigPath.js';
 import { pkgGenerator } from './pkg-generator.js';
@@ -23,8 +24,32 @@ describe('ts-reference-based publishable package', () => {
   };
 
   beforeAll(async () => {
+    // Mock fetch for npm registry calls
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: vi.fn().mockResolvedValue({
+          'dist-tags': {
+            latest: '1.1.0',
+            canary: '1.1.0-canary.1',
+          },
+          versions: {
+            '1.0.0': {},
+            '0.9.0': {},
+            '1.1.0-canary.1': {},
+          },
+        }),
+      } as any),
+    );
+
     tree = createEmptyReferenceBasedWorkspace();
     await pkgGenerator(tree, options);
+  });
+
+  afterAll(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
   });
 
   it('should run successfully', () => {
@@ -262,8 +287,32 @@ describe('ts-path-based publishable package', () => {
   };
 
   beforeAll(async () => {
+    // Mock fetch for npm registry calls
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: vi.fn().mockResolvedValue({
+          'dist-tags': {
+            latest: '1.1.0',
+            canary: '1.1.0-canary.1',
+          },
+          versions: {
+            '1.0.0': {},
+            '0.9.0': {},
+            '1.1.0-canary.1': {},
+          },
+        }),
+      } as any),
+    );
+
     tree = createEmptyPathBasedWorkspace();
     await pkgGenerator(tree, options);
+  });
+
+  afterAll(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
   });
 
   it('should run successfully', () => {
