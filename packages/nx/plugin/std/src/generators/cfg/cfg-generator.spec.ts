@@ -15,7 +15,7 @@ describe('cfg generator', () => {
     tree = createWorkspace();
 
     // Mock fetch for npm registry calls
-    global.fetch = vi.fn().mockResolvedValue({
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
       ok: true,
       json: vi.fn().mockResolvedValue({
         'dist-tags': {
@@ -28,10 +28,11 @@ describe('cfg generator', () => {
           '1.1.0-canary.1': {},
         },
       }),
-    } as any);
+    } as any));
   });
 
   afterEach(() => {
+    vi.unstubAllGlobals();
     vi.restoreAllMocks();
   });
 
