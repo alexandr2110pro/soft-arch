@@ -5,7 +5,7 @@
 
 ### 🩹 Fixes
 
-- **nx-plugin-std:** add missing return statement in setJsTsOptions ([8181075](https://github.com/alexandr2110pro/soft-arch/commit/8181075))
+- **nx-plugin-std:** add missing return statement in setJsTsOptions ([8181075](https://github.com/alexandr2110pro/space-architects/commit/8181075))
 
 ### ❤️ Thank You
 
@@ -15,7 +15,7 @@
 
 ### 🚀 Features
 
-- **nx-plugin-std:** add JS preset support and improve TypeScript configuration ([eefc06a](https://github.com/alexandr2110pro/soft-arch/commit/eefc06a))
+- **nx-plugin-std:** add JS preset support and improve TypeScript configuration ([eefc06a](https://github.com/alexandr2110pro/space-architects/commit/eefc06a))
 
 ### ❤️ Thank You
 
@@ -25,7 +25,7 @@
 
 ### 💅 Refactors
 
-- **nx-plugin-std:** improve rm generator dependency cleanup ([5ff088e](https://github.com/alexandr2110pro/soft-arch/commit/5ff088e))
+- **nx-plugin-std:** improve rm generator dependency cleanup ([5ff088e](https://github.com/alexandr2110pro/space-architects/commit/5ff088e))
 
 ### ❤️ Thank You
 
@@ -35,7 +35,7 @@
 
 ### 🩹 Fixes
 
-- **nx-plugin-std:** remove incorrect package name pattern from mv and rm generators ([2f4c4f0](https://github.com/alexandr2110pro/soft-arch/commit/2f4c4f0))
+- **nx-plugin-std:** remove incorrect package name pattern from mv and rm generators ([2f4c4f0](https://github.com/alexandr2110pro/space-architects/commit/2f4c4f0))
 
 ### ❤️ Thank You
 
@@ -45,7 +45,7 @@
 
 ### 🚀 Features
 
-- **nx-plugin-std:** add mv and rm generators for project management ([36a4e46](https://github.com/alexandr2110pro/soft-arch/commit/36a4e46))
+- **nx-plugin-std:** add mv and rm generators for project management ([36a4e46](https://github.com/alexandr2110pro/space-architects/commit/36a4e46))
 
 ### ❤️ Thank You
 
@@ -55,7 +55,7 @@
 
 ### 🩹 Fixes
 
-- **nx-plugin-std:** fix babelrc config for next libs ([b8a6850](https://github.com/alexandr2110pro/soft-arch/commit/b8a6850))
+- **nx-plugin-std:** fix babelrc config for next libs ([b8a6850](https://github.com/alexandr2110pro/space-architects/commit/b8a6850))
 
 ### ❤️ Thank You
 
@@ -65,7 +65,7 @@
 
 ### 🩹 Fixes
 
-- **nx-plugin-std:** fix buildable lib generation ([be053a7](https://github.com/alexandr2110pro/soft-arch/commit/be053a7))
+- **nx-plugin-std:** fix buildable lib generation ([be053a7](https://github.com/alexandr2110pro/space-architects/commit/be053a7))
 
 ### ❤️ Thank You
 
@@ -75,7 +75,7 @@
 
 ### 🚀 Features
 
-- **nx-plugin-std:** add buildable and preset options to package generator ([d26e003](https://github.com/alexandr2110pro/soft-arch/commit/d26e003))
+- **nx-plugin-std:** add buildable and preset options to package generator ([d26e003](https://github.com/alexandr2110pro/space-architects/commit/d26e003))
 
 ### ❤️ Thank You
 
@@ -85,7 +85,7 @@
 
 ### 🚀 Features
 
-- **util-ts:** add NonEmptyArray type export ([20455e9](https://github.com/alexandr2110pro/soft-arch/commit/20455e9))
+- **util-ts:** add NonEmptyArray type export ([20455e9](https://github.com/alexandr2110pro/space-architects/commit/20455e9))
 
 ### ❤️ Thank You
 
@@ -95,7 +95,7 @@
 
 ### 🚀 Features
 
-- **util-drizzle:** enhance lazyDrizzle with proper entity type checking ([6ec3771](https://github.com/alexandr2110pro/soft-arch/commit/6ec3771))
+- **util-drizzle:** enhance lazyDrizzle with proper entity type checking ([6ec3771](https://github.com/alexandr2110pro/space-architects/commit/6ec3771))
 
 ### ❤️ Thank You
 
@@ -105,7 +105,7 @@
 
 ### 📖 Documentation
 
-- **workspace,nx-plugin-std:** improve rules clarity and consistency ([cf97cde](https://github.com/alexandr2110pro/soft-arch/commit/cf97cde))
+- **workspace,nx-plugin-std:** improve rules clarity and consistency ([cf97cde](https://github.com/alexandr2110pro/space-architects/commit/cf97cde))
 
 ### ❤️ Thank You
 
@@ -115,11 +115,11 @@
 
 ### 📖 Documentation
 
-- **workspace:** add commit process guidelines ([7504e69](https://github.com/alexandr2110pro/soft-arch/commit/7504e69))
+- **workspace:** add commit process guidelines ([7504e69](https://github.com/alexandr2110pro/space-architects/commit/7504e69))
 
 ### 📦 Build
 
-- **util-drizzle:** add drizzle-orm/pg-core to external deps ([a0a5d86](https://github.com/alexandr2110pro/soft-arch/commit/a0a5d86))
+- **util-drizzle:** add drizzle-orm/pg-core to external deps ([a0a5d86](https://github.com/alexandr2110pro/space-architects/commit/a0a5d86))
 
 ### ❤️ Thank You
 
@@ -129,7 +129,7 @@
 
 ### 📦 Build
 
-- **util-drizzle,util-enum,util-ts:** update package configs ([6d1aae2](https://github.com/alexandr2110pro/soft-arch/commit/6d1aae2))
+- **util-drizzle,util-enum,util-ts:** update package configs ([6d1aae2](https://github.com/alexandr2110pro/space-architects/commit/6d1aae2))
 
 ### ❤️ Thank You
 
@@ -139,7 +139,7 @@
 
 ### 🚀 Features
 
-- **util-drizzle,nx-plugin-std:** add util-drizzle package and update pkg generator ([9a0aef5](https://github.com/alexandr2110pro/soft-arch/commit/9a0aef5))
+- **util-drizzle,nx-plugin-std:** add util-drizzle package and update pkg generator ([9a0aef5](https://github.com/alexandr2110pro/space-architects/commit/9a0aef5))
 
 ### ❤️ Thank You
 
@@ -149,7 +149,7 @@
 
 ### 🚀 Features
 
-- ⚠️  **util-enum,util-ts:** enhance enum utilities with breaking changes ([460d1f4](https://github.com/alexandr2110pro/soft-arch/commit/460d1f4))
+- ⚠️  **util-enum,util-ts:** enhance enum utilities with breaking changes ([460d1f4](https://github.com/alexandr2110pro/space-architects/commit/460d1f4))
 
 ### ⚠️  Breaking Changes
 
@@ -163,13 +163,13 @@
 
 ### 🚀 Features
 
-- implement automated release system with Nx Release ([2350287](https://github.com/alexandr2110pro/soft-arch/commit/2350287))
-- **nx-plugin-std:** better publishable pkg generation ([00bb1ad](https://github.com/alexandr2110pro/soft-arch/commit/00bb1ad))
-- **util-enum,nx-plugin-std,util-ts,workspace:** add enum utilities, major plugin and config updates - Add @soft-arch/util-enum package with core enum utilities - Add new generators and refactor structure in nx-plugin-std - Update and extend util-ts utilities - Update workspace configs, docs, and scripts - Remove obsolete generator files and update snapshots - Add and update VSCode and migration configs ([69208f2](https://github.com/alexandr2110pro/soft-arch/commit/69208f2))
+- implement automated release system with Nx Release ([2350287](https://github.com/alexandr2110pro/space-architects/commit/2350287))
+- **nx-plugin-std:** better publishable pkg generation ([00bb1ad](https://github.com/alexandr2110pro/space-architects/commit/00bb1ad))
+- **util-enum,nx-plugin-std,util-ts,workspace:** add enum utilities, major plugin and config updates - Add @space-arch/util-enum package with core enum utilities - Add new generators and refactor structure in nx-plugin-std - Update and extend util-ts utilities - Update workspace configs, docs, and scripts - Remove obsolete generator files and update snapshots - Add and update VSCode and migration configs ([69208f2](https://github.com/alexandr2110pro/space-architects/commit/69208f2))
 
 ### 📖 Documentation
 
-- add setup instructions for automated release system ([2199bf0](https://github.com/alexandr2110pro/soft-arch/commit/2199bf0))
+- add setup instructions for automated release system ([2199bf0](https://github.com/alexandr2110pro/space-architects/commit/2199bf0))
 
 ### ❤️ Thank You
 
@@ -179,7 +179,7 @@
 
 ### 🩹 Fixes
 
-- wrong file pointers in package.json ([e2756dd](https://github.com/alexandr2110pro/soft-arch/commit/e2756dd))
+- wrong file pointers in package.json ([e2756dd](https://github.com/alexandr2110pro/space-architects/commit/e2756dd))
 
 ### ❤️ Thank You
 
@@ -189,7 +189,7 @@
 
 ### 🩹 Fixes
 
-- **util-ts:** add CommonJS export support ([341c97e](https://github.com/alexandr2110pro/soft-arch/commit/341c97e))
+- **util-ts:** add CommonJS export support ([341c97e](https://github.com/alexandr2110pro/space-architects/commit/341c97e))
 
 ### ❤️ Thank You
 
@@ -199,7 +199,7 @@
 
 ### 🚀 Features
 
-- **workspace:** add PropTupleFromArray utility and update dependencies ([39dd961](https://github.com/alexandr2110pro/soft-arch/commit/39dd961))
+- **workspace:** add PropTupleFromArray utility and update dependencies ([39dd961](https://github.com/alexandr2110pro/space-architects/commit/39dd961))
 
 ### ❤️ Thank You
 
@@ -209,7 +209,7 @@
 
 ### 🚀 Features
 
-- **nx:** add drizzle orm rules and nx config updates ([11eefe7](https://github.com/alexandr2110pro/soft-arch/commit/11eefe7))
+- **nx:** add drizzle orm rules and nx config updates ([11eefe7](https://github.com/alexandr2110pro/space-architects/commit/11eefe7))
 
 ### ❤️ Thank You
 
@@ -219,8 +219,8 @@
 
 ### 🚀 Features
 
-- **util-enum:** add enum utilities package ([433a2c4](https://github.com/alexandr2110pro/soft-arch/commit/433a2c4))
-- **util-enum,nx-plugin-std:** add enum suite functionality and improve package generator ([766a3ed](https://github.com/alexandr2110pro/soft-arch/commit/766a3ed))
+- **util-enum:** add enum utilities package ([433a2c4](https://github.com/alexandr2110pro/space-architects/commit/433a2c4))
+- **util-enum,nx-plugin-std:** add enum suite functionality and improve package generator ([766a3ed](https://github.com/alexandr2110pro/space-architects/commit/766a3ed))
 
 ### ❤️ Thank You
 
@@ -232,11 +232,11 @@
 
 ### 🚀 Features
 
-- **workspace:** enhance cursor rules and configuration ([c18caa3](https://github.com/alexandr2110pro/soft-arch/commit/c18caa3))
+- **workspace:** enhance cursor rules and configuration ([c18caa3](https://github.com/alexandr2110pro/space-architects/commit/c18caa3))
 
 ### 💅 Refactors
 
-- **nx-plugin-std:** reorganize generators from init to cfg ([1055327](https://github.com/alexandr2110pro/soft-arch/commit/1055327))
+- **nx-plugin-std:** reorganize generators from init to cfg ([1055327](https://github.com/alexandr2110pro/space-architects/commit/1055327))
 
 ### ❤️ Thank You
 
@@ -246,15 +246,15 @@
 
 ### 💅 Refactors
 
-- **nx-plugin-std:** convert eslint config to template file ([b841b50](https://github.com/alexandr2110pro/soft-arch/commit/b841b50))
+- **nx-plugin-std:** convert eslint config to template file ([b841b50](https://github.com/alexandr2110pro/space-architects/commit/b841b50))
 
 ### 📖 Documentation
 
-- improve package READMEs with clearer purpose and usage ([4a70f59](https://github.com/alexandr2110pro/soft-arch/commit/4a70f59))
+- improve package READMEs with clearer purpose and usage ([4a70f59](https://github.com/alexandr2110pro/space-architects/commit/4a70f59))
 
 ### ✅ Tests
 
-- **nx-plugin-std:** add comprehensive tests for non-publishable package generation - Add test suite for ts-reference-based not publishable packages - Update snapshots to include non-publishable vite.config.ts - Rename makeStandardPackageJsonSettings to rootPackageJsonBase for clarity - Ensure non-publishable packages don't include publish-related configuration ([f3794b0](https://github.com/alexandr2110pro/soft-arch/commit/f3794b0))
+- **nx-plugin-std:** add comprehensive tests for non-publishable package generation - Add test suite for ts-reference-based not publishable packages - Update snapshots to include non-publishable vite.config.ts - Rename makeStandardPackageJsonSettings to rootPackageJsonBase for clarity - Ensure non-publishable packages don't include publish-related configuration ([f3794b0](https://github.com/alexandr2110pro/space-architects/commit/f3794b0))
 
 ### ❤️ Thank You
 
@@ -264,8 +264,8 @@
 
 ### 🚀 Features
 
-- implement automated release system with Nx Release ([2350287](https://github.com/alexandr2110pro/soft-arch/commit/2350287))
-- **nx-plugin-std:** better publishable pkg generation ([00bb1ad](https://github.com/alexandr2110pro/soft-arch/commit/00bb1ad))
+- implement automated release system with Nx Release ([2350287](https://github.com/alexandr2110pro/space-architects/commit/2350287))
+- **nx-plugin-std:** better publishable pkg generation ([00bb1ad](https://github.com/alexandr2110pro/space-architects/commit/00bb1ad))
 
 ### ❤️ Thank You
 

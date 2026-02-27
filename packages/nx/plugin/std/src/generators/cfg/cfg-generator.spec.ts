@@ -1,9 +1,9 @@
-import { Tree, readJson, updateJson } from '@nx/devkit';
-import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { type Tree, readJson, updateJson } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing.js';
 import { vi } from 'vitest';
 
-import cfgGenerator from './cfg-generator';
-import type { CfgGeneratorSchema } from './schema';
+import cfgGenerator from './cfg-generator.js';
+import type { CfgGeneratorSchema } from './schema.d.ts';
 
 describe('cfg generator', () => {
   let tree: Tree;

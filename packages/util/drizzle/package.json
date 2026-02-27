@@ -1,5 +1,5 @@
 {
-  "name": "@soft-arch/util-drizzle",
+  "name": "@space-arch/util-drizzle",
   "version": "1.6.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -8,7 +8,7 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@soft-arch/source": "./src/index.ts",
+      "@space-arch/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
@@ -31,21 +31,21 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/alexandr2110pro/soft-arch#readme",
+  "homepage": "https://github.com/alexandr2110pro/space-architects#readme",
   "bugs": {
-    "url": "https://github.com/alexandr2110pro/soft-arch/issues"
+    "url": "https://github.com/alexandr2110pro/space-architects/issues"
   },
-  "author": "SoftArch",
+  "author": "Space Architects",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexandr2110pro/soft-arch.git",
+    "url": "https://github.com/alexandr2110pro/space-architects.git",
     "directory": "packages/util/drizzle"
   },
   "keywords": [
     "drizzle",
     "drizzle-orm",
-    "soft-arch",
+    "space-arch",
     "util",
     "uuidv7",
     "lazy"

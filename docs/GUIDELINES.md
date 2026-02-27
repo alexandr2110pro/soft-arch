@@ -267,7 +267,7 @@ Enforced by Prettier with `@trivago/prettier-plugin-sort-imports`. The order is:
 
 1. `server-only`
 2. Third-party packages
-3. `@soft-arch/*`
+3. `@space-arch/*`
 4. Relative imports (`../`)
 5. Relative imports (`./`)
 
@@ -399,7 +399,7 @@ packages/<category>/<name>/
 | Types / Interfaces | PascalCase | `EnumObject`, `Simplify`, `PropValues` |
 | Test files | Colocated `.spec.ts` | `enum-object.spec.ts` |
 | Packages | kebab-case in path | `packages/util/enum/` |
-| npm scope | `@soft-arch/` | `@soft-arch/util-enum` |
+| npm scope | `@space-arch/` | `@space-arch/util-enum` |
 
 ### Nx Project Names
 
@@ -415,7 +415,7 @@ Project names are defined in `package.json` under `"nx": { "name": "..." }`:
 - Only packages tagged `npm:public` in `package.json` `nx.tags` are published to npm
 - Each package is **independently versioned** -- only packages with changes are bumped on release
 - Packages emit **dual output**: ESM (`.js`) + CJS (`.cjs`) + TypeScript declarations (`.d.ts`)
-- Each package exposes a `@soft-arch/source` custom export condition pointing to TypeScript source (used for in-monorepo development)
+- Each package exposes a `@space-arch/source` custom export condition pointing to TypeScript source (used for in-monorepo development)
 
 ### Build Tools
 
@@ -427,7 +427,7 @@ Project names are defined in `package.json` under `"nx": { "name": "..." }`:
 Use the Nx generator:
 
 ```bash
-nx g @soft-arch/nx-plugin-std:pkg
+nx g @space-arch/nx-plugin-std:pkg
 ```
 
 Follow the prompts to select kind, path, publishability, and environment.

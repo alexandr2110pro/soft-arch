@@ -6,12 +6,12 @@
   "properties": {
     "packageName": {
       "type": "string",
-      "description": "The name of the package to remove",
+      "description": "The name of the package to move",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What package name would you like to remove?",
+      "x-prompt": "What package name would you like to move?",
       "x-dropdown": "projects"
     },
     "newPath": {
@@ -20,5 +20,5 @@
       "x-prompt": "What is the new path of the package?"
     }
   },
-  "required": ["name"]
+  "required": ["packageName", "newPath"]
 }

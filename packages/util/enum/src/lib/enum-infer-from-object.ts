@@ -1,4 +1,4 @@
-import type { PropValues } from '@soft-arch/util-ts';
+import type { PropValues } from '@space-arch/util-ts';
 
 export type EnumInferFromObject<TEnumObject extends Record<string, string>> =
   PropValues<TEnumObject>;

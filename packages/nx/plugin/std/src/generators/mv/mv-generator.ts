@@ -1,7 +1,7 @@
-import { Tree } from '@nx/devkit';
+import type { Tree } from '@nx/devkit';
 import { moveGenerator } from '@nx/workspace';
 
-import { MvGeneratorSchema } from './schema';
+import type { MvGeneratorSchema } from './schema.d.ts';
 
 export async function mvGenerator(tree: Tree, options: MvGeneratorSchema) {
   const { packageName, newPath } = options;

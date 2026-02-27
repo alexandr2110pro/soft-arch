@@ -11,7 +11,7 @@
 ```bash
 # Clone and install
 git clone <repo-url>
-cd soft-arch
+cd space-arch
 pnpm install
 
 # Start local registry for testing packages
@@ -29,7 +29,7 @@ Add these secrets in GitHub Settings → Secrets → Actions:
 
 1. **`NPM_ACCESS_TOKEN`**
    - Create at [npmjs.com](https://npmjs.com) → Account Settings → Access Tokens
-   - Grant read/write access to `@soft-arch/*` packages
+   - Grant read/write access to `@space-arch/*` packages
 
 ### Package Configuration
 
@@ -37,7 +37,7 @@ Each publishable package needs:
 
 ```json
 {
-  "name": "@soft-arch/package-name",
+  "name": "@space-arch/package-name",
   "version": "0.0.1", 
   "files": ["dist"],
   "main": "./dist/index.js",

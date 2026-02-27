@@ -7,7 +7,7 @@
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["@edge-runtime/types", "vite/client", "node"]
+    "types": ["vite/client", "node"]
   },
   "include": ["src/**/*.ts"],
   "references": [

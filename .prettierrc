@@ -14,7 +14,7 @@
   "importOrder": [
     "^server-only$",
     "<THIRD_PARTY_MODULES>",
-    "^@soft-arch\\/",
+    "^@space-arch\\/",
     "^\\.\\./",
     "^\\./"
   ],

@@ -1,25 +1,31 @@
 {
-  "name": "@soft-arch/source",
+  "name": "@space-arch/source",
   "version": "0.0.0",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "local-registry": "nx local-registry"
   },
   "private": true,
+  "packageManager": "pnpm@10.30.0",
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=10"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexandr2110pro/soft-arch.git",
+    "url": "https://github.com/alexandr2110pro/space-architects.git",
     "directory": "."
   },
-  "homepage": "https://github.com/alexandr2110pro/soft-arch#readme",
+  "homepage": "https://github.com/alexandr2110pro/space-architects#readme",
   "bugs": {
-    "url": "https://github.com/alexandr2110pro/soft-arch/issues"
+    "url": "https://github.com/alexandr2110pro/space-architects/issues"
   },
-  "author": "SoftArch",
+  "author": "Space Architects",
   "dependencies": {
-    "@soft-arch/util-drizzle": "workspace:*",
-    "@soft-arch/util-enum": "workspace:*",
-    "@soft-arch/util-ts": "workspace:*",
+    "@space-arch/util-drizzle": "workspace:*",
+    "@space-arch/util-enum": "workspace:*",
+    "@space-arch/util-ts": "workspace:*",
     "drizzle-orm": "^0.45.1",
     "next": "16.1.6",
     "react": "19.2.4",
@@ -28,8 +34,6 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@edge-runtime/types": "^4.0.0",
-    "@edge-runtime/vm": "^5.0.0",
     "@eslint/js": "^9.28.0",
     "@nx/devkit": "22.5.2",
     "@nx/eslint": "22.5.2",

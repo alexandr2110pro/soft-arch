@@ -1,14 +1,15 @@
 {
-  "name": "@soft-arch/nx-plugin-std",
+  "name": "@space-arch/nx-plugin-std",
   "version": "1.6.1",
-  "description": "Standard Nx plugin for SoftArch workspace",
+  "description": "Standard Nx plugin for Space Architects workspace",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "type": "module",
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@soft-arch/source": "./src/index.ts",
+      "@space-arch/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
@@ -21,20 +22,20 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexandr2110pro/soft-arch.git",
+    "url": "https://github.com/alexandr2110pro/space-architects.git",
     "directory": "packages/nx/plugin/std"
   },
-  "homepage": "https://github.com/alexandr2110pro/soft-arch#readme",
+  "homepage": "https://github.com/alexandr2110pro/space-architects#readme",
   "bugs": {
-    "url": "https://github.com/alexandr2110pro/soft-arch/issues"
+    "url": "https://github.com/alexandr2110pro/space-architects/issues"
   },
   "keywords": [
     "nx",
     "plugin",
     "workspace",
-    "soft-arch"
+    "space-arch"
   ],
-  "author": "SoftArch",
+  "author": "Space Architects",
   "license": "MIT",
   "publishConfig": {
     "access": "public"

@@ -33,14 +33,11 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         name: Install pnpm
-        with:
-          version: 9.8.0
-          run_install: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: '.node-version'
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
 
@@ -65,7 +62,7 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_ACCESS_TOKEN }}" > ~/.npmrc
           echo "registry=https://registry.npmjs.org" >> ~/.npmrc
-          echo "@soft-arch:registry=https://registry.npmjs.org" >> ~/.npmrc
+          echo "@space-arch:registry=https://registry.npmjs.org" >> ~/.npmrc
 
       - name: Publish to npm
         if: ${{ !inputs.dry-run }}

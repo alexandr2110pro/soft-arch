@@ -1,9 +1,9 @@
-import { Tree, logger, readJson } from '@nx/devkit';
-import type { PackageJson } from 'nx/src/utils/package-json';
+import { type Tree, logger, readJson } from '@nx/devkit';
+import type { PackageJson } from 'nx/src/utils/package-json.js';
 
-import { initCursorRules } from './lib/initCursorRules';
-import { initEslintAndPrettierConfigs } from './lib/initEslintAndPrettierConfigs';
-import { CfgGeneratorSchema } from './schema';
+import { initCursorRules } from './lib/initCursorRules.ts';
+import { initEslintAndPrettierConfigs } from './lib/initEslintAndPrettierConfigs.ts';
+import type { CfgGeneratorSchema } from './schema.d.ts';
 
 export async function cfgGenerator(tree: Tree, options: CfgGeneratorSchema) {
   const { options: selectedOptions } = options;

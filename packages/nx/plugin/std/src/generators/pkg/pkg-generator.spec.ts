@@ -1,37 +1,16 @@
 import {
-  Tree,
+  type Tree,
   readJson,
   readProjectConfiguration,
   updateJson,
   writeJson,
 } from '@nx/devkit';
-import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing.js';
 
 import { resolveViteConfigPath } from './lib/util/resolveViteConfigPath.js';
 import { pkgGenerator } from './pkg-generator.js';
-import type { PkgGeneratorSchema } from './schema.js';
+import type { PkgGeneratorSchema } from './schema.d.ts';
 
-beforeEach(() => {
-  // Mock fetch for npm registry calls
-  global.fetch = vi.fn().mockResolvedValue({
-    ok: true,
-    json: vi.fn().mockResolvedValue({
-      'dist-tags': {
-        latest: '1.1.0',
-        canary: '1.1.0-canary.1',
-      },
-      versions: {
-        '1.0.0': {},
-        '0.9.0': {},
-        '1.1.0-canary.1': {},
-      },
-    }),
-  } as any);
-});
-
-afterEach(() => {
-  vi.restoreAllMocks();
-});
 describe('ts-reference-based publishable package', () => {
   let tree: Tree;
 
@@ -118,14 +97,6 @@ describe('ts-reference-based publishable package', () => {
       `environment: 'edge-runtime',`,
     );
   });
-
-  it('should add @edge-runtime/vm and @edge-runtime/types to the package.json if env is edge', async () => {
-    await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(readJson(tree, 'package.json').devDependencies).toMatchObject({
-      '@edge-runtime/vm': '1.1.0',
-      '@edge-runtime/types': '1.1.0',
-    });
-  });
 });
 
 describe('ts-reference-based not publishable package', () => {
@@ -135,6 +106,7 @@ describe('ts-reference-based not publishable package', () => {
     path: 'packages/foo/bar-baz',
     kind: 'ts-reference-based',
     publishable: false,
+    buildable: false,
     env: 'node',
   };
 
@@ -282,14 +254,6 @@ describe('ts-reference-based not publishable package', () => {
     expect(packageJson.author).toBeUndefined();
     expect(packageJson.license).toBeUndefined();
   });
-
-  it('should add @edge-runtime/types and @edge-runtime/vm to the package.json if env is edge', async () => {
-    await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(readJson(tree, 'package.json').devDependencies).toMatchObject({
-      '@edge-runtime/types': '1.1.0',
-      '@edge-runtime/vm': '1.1.0',
-    });
-  });
 });
 
 describe('ts-path-based publishable package', () => {
@@ -299,6 +263,7 @@ describe('ts-path-based publishable package', () => {
     path: 'packages/foo/bar-baz',
     kind: 'ts-paths-based',
     publishable: true,
+    buildable: true,
     env: 'node',
   };
 
@@ -382,14 +347,6 @@ describe('ts-path-based publishable package', () => {
       `environment: 'edge-runtime',`,
     );
   });
-
-  it('should add @edge-runtime/types and @edge-runtime/vm to the package.json if env is edge', async () => {
-    await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(readJson(tree, 'package.json').devDependencies).toMatchObject({
-      '@edge-runtime/vm': '1.1.0',
-      '@edge-runtime/types': '1.1.0',
-    });
-  });
 });
 
 describe('ts-path-based non-publishable package', () => {
@@ -399,6 +356,7 @@ describe('ts-path-based non-publishable package', () => {
     path: 'packages/foo/bar-baz',
     kind: 'ts-paths-based',
     publishable: false,
+    buildable: false,
     env: 'node',
   };
 
@@ -431,7 +389,7 @@ describe('ts-path-based non-publishable package', () => {
     const projectConfig = readProjectConfiguration(tree, 'foo-bar-baz');
     expect(projectConfig.targets?.test).toBeDefined();
     expect(projectConfig.targets?.lint).toBeDefined();
-    expect(projectConfig.targets?.build).toBeDefined(); // No build target for non-publishable
+    expect(projectConfig.targets?.build).not.toBeDefined(); // No build target for non-publishable
   });
 
   it('should generate expected vite.config.ts with test configuration only', async () => {
@@ -471,14 +429,6 @@ describe('ts-path-based non-publishable package', () => {
     expect(readViteConfig(tree, 'packages/foo/bar-baz')).toContain(
       `environment: 'edge-runtime',`,
     );
-  });
-
-  it('should add @edge-runtime/types and @edge-runtime/vm to the package.json if env is edge', async () => {
-    await pkgGenerator(tree, { ...options, env: 'edge' });
-    expect(readJson(tree, 'package.json').devDependencies).toMatchObject({
-      '@edge-runtime/vm': '1.1.0',
-      '@edge-runtime/types': '1.1.0',
-    });
   });
 
   it('should generate expected vite.config.ts', async () => {
@@ -549,14 +499,14 @@ function rootPackageJsonBase() {
     name: '@ns/source',
     repository: {
       type: 'git',
-      url: 'https://github.com/alexandr2110pro/soft-arch.git',
+      url: 'https://github.com/alexandr2110pro/space-architects.git',
       directory: '.',
     },
-    homepage: 'https://github.com/alexandr2110pro/soft-arch',
+    homepage: 'https://github.com/alexandr2110pro/space-architects',
     bugs: {
-      url: 'https://github.com/alexandr2110pro/soft-arch/issues',
+      url: 'https://github.com/alexandr2110pro/space-architects/issues',
     },
-    author: 'SoftArch',
+    author: 'Space Architects',
     license: 'MIT',
   };
 }

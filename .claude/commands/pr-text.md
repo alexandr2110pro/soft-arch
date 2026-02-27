@@ -23,7 +23,7 @@ Produce a concise title and a markdown description body. Example:
 
 ## Affected Packages
 
-- `@soft-arch/util-enum`
+- `@space-arch/util-enum`
 
 ## Public API Changes
 
@@ -34,7 +34,7 @@ Produce a concise title and a markdown description body. Example:
 
 - The title must be under 72 characters and use conventional commit format.
 - The description should have a `## Summary` section with concise bullet points.
-- Include `## Affected Packages` listing which `@soft-arch/*` packages are touched.
+- Include `## Affected Packages` listing which `@space-arch/*` packages are touched.
 - Include `## Public API Changes` if any exports in `index.ts` files changed (added, removed, modified).
 - Capture the *why* and *what*, not the *how*. Avoid listing every file touched.
 - Do not include testing/verification/QA instructions.

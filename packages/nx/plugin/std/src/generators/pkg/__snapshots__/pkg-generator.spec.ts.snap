@@ -222,15 +222,15 @@ exports[`ts-reference-based publishable package > should generate expected packa
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/alexandr2110pro/soft-arch",
+  "homepage": "https://github.com/alexandr2110pro/space-architects",
   "bugs": {
-    "url": "https://github.com/alexandr2110pro/soft-arch/issues"
+    "url": "https://github.com/alexandr2110pro/space-architects/issues"
   },
-  "author": "SoftArch",
+  "author": "Space Architects",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexandr2110pro/soft-arch.git",
+    "url": "https://github.com/alexandr2110pro/space-architects.git",
     "directory": "packages/foo/bar-baz"
   }
 }

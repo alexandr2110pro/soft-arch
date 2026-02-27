@@ -1,6 +1,6 @@
-# SoftArch Open Source
+# Space Architects Open Source
 
-A monorepo for SoftArch Open Source projects.
+A monorepo for Space Architects Open Source projects.
 
 ## Structure
 

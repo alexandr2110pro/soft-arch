@@ -1,4 +1,4 @@
-# Task Completion Checklist: soft-arch
+# Task Completion Checklist: space-arch
 
 After completing any coding task, run the following in order:
 

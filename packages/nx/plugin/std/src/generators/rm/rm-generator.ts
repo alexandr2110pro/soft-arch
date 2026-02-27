@@ -1,7 +1,7 @@
 import { type Tree, readProjectConfiguration, updateJson } from '@nx/devkit';
 import { readPackageJson, removeGenerator } from '@nx/workspace';
 
-import { RmGeneratorSchema } from './schema';
+import type { RmGeneratorSchema } from './schema.d.ts';
 
 export async function rmGenerator(tree: Tree, options: RmGeneratorSchema) {
   const project = readProjectConfiguration(tree, options.packageName);
@@ -14,8 +14,8 @@ export async function rmGenerator(tree: Tree, options: RmGeneratorSchema) {
   });
 
   updateJson(tree, 'package.json', json => {
-    delete json.dependencies[importPath];
-    delete json.devDependencies[importPath];
+    if (json.dependencies) delete json.dependencies[importPath];
+    if (json.devDependencies) delete json.devDependencies[importPath];
     return json;
   });
 }

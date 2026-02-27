@@ -6,7 +6,7 @@ import {
   joinPathFragments,
 } from '@nx/devkit';
 
-import { versionResolve } from './versionResolve';
+import { versionResolve } from './versionResolve.ts';
 
 export async function initEslintAndPrettierConfigs(
   tree: Tree,
