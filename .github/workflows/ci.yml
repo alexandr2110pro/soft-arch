@@ -23,14 +23,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           filter: tree:0
           fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
         name: Install pnpm
 
-      - run: pnpm dlx nx-cloud start-ci-run --distribute-on=".nx/workflows/dynamic-changesets.yaml" --stop-agents-after="build,lint,test"
+      - run: pnpm dlx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="build,lint,test"
 
       # Cache node_modules
       - uses: actions/setup-node@v4
