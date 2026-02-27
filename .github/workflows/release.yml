@@ -57,11 +57,14 @@ jobs:
         if: ${{ !inputs.dry-run }}
         run: pnpm dlx nx release --skip-publish --verbose ${{ inputs.first-release && '--first-release' || '' }}
 
+      - name: Setup npm auth for publishing
+        if: ${{ !inputs.dry-run }}
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_ACCESS_TOKEN }}" >> .npmrc
+
       - name: Publish to npm
         if: ${{ !inputs.dry-run }}
         run: pnpm dlx nx release publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
 
       - name: Create GitHub Releases
