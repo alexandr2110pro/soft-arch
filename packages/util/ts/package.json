@@ -21,12 +21,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexandr2110pro/space-architects.git",
+    "url": "https://github.com/alexandr2110pro/space-arch.git",
     "directory": "packages/util/ts"
   },
-  "homepage": "https://github.com/alexandr2110pro/space-architects#readme",
+  "homepage": "https://github.com/alexandr2110pro/space-arch#readme",
   "bugs": {
-    "url": "https://github.com/alexandr2110pro/space-architects/issues"
+    "url": "https://github.com/alexandr2110pro/space-arch/issues"
   },
   "keywords": [
     "typescript",

@@ -227,6 +227,6 @@ Contributions are welcome! Please read our contributing guidelines and submit pu
 
 ## Support
 
-- 🐛 [Report bugs](https://github.com/alexandr2110pro/space-architects/issues)
-- 💡 [Request features](https://github.com/alexandr2110pro/space-architects/issues)
-- 📖 [Documentation](https://github.com/alexandr2110pro/space-architects#readme)
+- 🐛 [Report bugs](https://github.com/alexandr2110pro/space-arch/issues)
+- 💡 [Request features](https://github.com/alexandr2110pro/space-arch/issues)
+- 📖 [Documentation](https://github.com/alexandr2110pro/space-arch#readme)
