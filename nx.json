@@ -12,14 +12,12 @@
     ],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
-  "nxCloudId": "684330001d3e2733b4f839a6",
+  "nxCloudId": "69a18ec5c7038877c95965c5",
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
       "options": {
-        "typecheck": {
-          "targetName": "typecheck"
-        },
+        "typecheck": { "targetName": "typecheck" },
         "build": {
           "targetName": "build",
           "configName": "tsconfig.lib.json",
@@ -28,12 +26,7 @@
         }
       }
     },
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    },
+    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } },
     {
       "plugin": "@nx/vite/plugin",
       "options": {
@@ -58,17 +51,10 @@
         "watchDepsTargetName": "watch-deps"
       }
     },
-    {
-      "plugin": "@nx/vitest",
-      "options": {
-        "testTargetName": "test"
-      }
-    }
+    { "plugin": "@nx/vitest", "options": { "testTargetName": "test" } }
   ],
   "targetDefaults": {
-    "test": {
-      "dependsOn": ["^build"]
-    },
+    "test": { "dependsOn": ["^build"] },
     "@nx/js:swc": {
       "cache": true,
       "dependsOn": ["^build"],
@@ -102,9 +88,7 @@
         "revert": { "semverBump": "patch" }
       }
     },
-    "git": {
-      "commitMessage": "chore(release): bump versions [no ci]"
-    },
+    "git": { "commitMessage": "chore(release): bump versions [no ci]" },
     "version": {
       "preVersionCommand": "pnpm dlx nx run-many -t build --projects=tag:npm:public",
       "fallbackCurrentVersionResolver": "disk",
@@ -114,13 +98,9 @@
       "workspaceChangelog": false,
       "projectChangelogs": {
         "entryWhenNoChanges": false,
-        "renderOptions": {
-          "authors": true
-        }
+        "renderOptions": { "authors": true }
       }
     },
-    "releaseTag": {
-      "pattern": "{projectName}@{version}"
-    }
+    "releaseTag": { "pattern": "{projectName}@{version}" }
   }
 }
