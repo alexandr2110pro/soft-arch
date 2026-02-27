@@ -499,14 +499,14 @@ function rootPackageJsonBase() {
     name: '@ns/source',
     repository: {
       type: 'git',
-      url: 'https://github.com/alexandr2110pro/space-architects.git',
+      url: 'https://github.com/author/repo.git',
       directory: '.',
     },
-    homepage: 'https://github.com/alexandr2110pro/space-architects',
+    homepage: 'https://github.com/author/repo',
     bugs: {
-      url: 'https://github.com/alexandr2110pro/space-architects/issues',
+      url: 'https://github.com/author/repo/issues',
     },
-    author: 'Space Architects',
+    author: 'Author',
     license: 'MIT',
   };
 }
